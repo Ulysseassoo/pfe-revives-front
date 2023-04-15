@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { io } from "socket.io-client";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import GlobalTheme from "./theme";
 
 function App() {
 	useEffect(() => {
@@ -33,7 +34,7 @@ function App() {
 	]);
 
 	return (
-		<ChakraProvider>
+		<ChakraProvider theme={GlobalTheme}>
 			<RouterProvider router={router} />
 		</ChakraProvider>
 	);
