@@ -8,7 +8,7 @@ import About from "./pages/About";
 function App() {
 	useEffect(() => {
 		// Connect to the Socket.io server
-		const socket = io("http://localhost:8000"); // Replace with your Socket.io server URL
+		const socket = io(import.meta.env.VITE_SOCKET_SERVER_HOST);
 
 		// Listen for events from the server
 		socket.on("welcome", (data) => {
