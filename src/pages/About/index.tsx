@@ -55,14 +55,17 @@ const About = () => {
 				>
 					<Text
 						color='#000000'
-						fontSize={25}
-						fontWeight='bold'
-						
+						fontSize={50}
+						fontWeight='900'
+						fontFamily='Metropolis'
 					>
 						QUI SOMMES NOUS ?
 					</Text>
 					<Text
 						color='#D4AA7D'
+						fontSize={35}
+						fontWeight='900'
+						fontFamily='Metropolis'
 					>
 						DÉBUT
 					</Text>
