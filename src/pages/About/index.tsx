@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Center, Flex, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
-import BackgroundImage from './../../assets/About/page-background.png'
-import ReviveLogo from './../../assets/About/revive-logo.png'
-import ReviveTitleBackground from './../../assets/About/revive-title-background.png'
-import ReviveAboutPartBackground from './../../assets/About/revive-about-part1-background.png'
-import ReviveAboutWhoBackground from './../../assets/About/revive-about-who-background.png'
+import BackgroundImage from '@assets/About/page-background.png'
+import ReviveLogo from '@assets/About/revive-logo.png'
+import ReviveAboutPartBackground from '@assets/About/revive-about-part1-background.png'
+import ReviveAboutWhoBackground from '@assets/About/revive-about-who-background.png'
+
+import TitleWithLogoBackground from '@components/Common/TitleWithLogoBackground'
 
 const About = () => {
 	return (
@@ -37,37 +38,7 @@ const About = () => {
 				</Box>
 			</Flex>
 
-			<Flex 
-				position='relative' 
-				marginY={25}
-			>
-				<Image 
-					src={ReviveTitleBackground} 
-					paddingX={50}
-					paddingY={5}
-				/>
-				<Box 
-					position='absolute'
-					left="50%"
-					top="50%"
-					transform="translate(-50%, -50%)" 
-					textAlign='center'
-				>
-					<Text
-						color='#000000'
-						fontSize={25}
-						fontWeight='bold'
-						
-					>
-						QUI SOMMES NOUS ?
-					</Text>
-					<Text
-						color='#D4AA7D'
-					>
-						DÉBUT
-					</Text>
-				</Box>
-			</Flex>
+			<TitleWithLogoBackground title='QUI SOMMES NOUS ?' subtitle='DÉBUT' />
 
 			<Flex
 				justifyContent='center'
