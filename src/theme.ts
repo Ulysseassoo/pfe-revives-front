@@ -1,4 +1,13 @@
-const GlobalTheme = {
+import { extendTheme } from "@chakra-ui/react";
+
+const GlobalTheme = extendTheme({
+	colors: {
+		primary: "#D4AA7D",
+	},
+	fonts: {
+		body: `'Open Sans', sans-serif`,
+		heading: `'Metropolis', sans-serif`,
+	},
 	styles: {
 		global: () => ({
 			"*": {
@@ -29,6 +38,8 @@ const GlobalTheme = {
 			},
 		}),
 	},
-};
+});
+
+export const PADDING_DESKTOP = "6rem";
 
 export default GlobalTheme;

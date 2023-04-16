@@ -5,6 +5,14 @@ import { io } from "socket.io-client";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import GlobalTheme from "./theme";
+import NavbarWrapper from "./components/NavbarWrapper";
+import Sneakers from "./pages/Sneakers";
+import Restauration from "./pages/Restauration";
+
+// Fonts
+import "@fontsource/metropolis";
+import "@fontsource/open-sans";
+import Contact from "./pages/Contact";
 
 function App() {
 	useEffect(() => {
@@ -25,11 +33,26 @@ function App() {
 	const router = createBrowserRouter([
 		{
 			path: "/",
-			element: <Home />,
-		},
-		{
-			path: "/about",
-			element: <About />,
+			element: <NavbarWrapper />,
+			children: [
+				{ path: "/", element: <Home /> },
+				{
+					path: "/about",
+					element: <About />,
+				},
+				{
+					path: "/sneakers",
+					element: <Sneakers />,
+				},
+				{
+					path: "/restauration",
+					element: <Restauration />,
+				},
+				{
+					path: "/contact",
+					element: <Contact />,
+				},
+			],
 		},
 	]);
 
