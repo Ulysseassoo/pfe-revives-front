@@ -16,7 +16,6 @@ const TitleWithLogoBackground = ({ title, subtitle }: PropsType) => {
         >
             <Image 
                 src={ReviveTitleBackground} 
-                paddingX={50}
                 paddingY={5}
             />
             <Box 
