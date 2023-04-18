@@ -10,7 +10,6 @@ const SecondLife = () => {
             alignItems='center'
             marginY={10}
             background='#1C1C1C'
-            paddingX={20}
             paddingY={10}
             paddingBottom='100px'
         >
