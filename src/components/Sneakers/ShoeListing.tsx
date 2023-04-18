@@ -9,15 +9,15 @@ import ArrowDown from '@assets/arrow-down.svg'
 import ShoeBox from '@components/Common/ShoeBox'
 
 type PropsType = {
-    filter: boolean
+    isFilter: boolean
     shoes: ShoeInterface[]
 }
 
-const ShoeListing = ({filter, shoes}: PropsType) => {
+const ShoeListing = ({isFilter, shoes}: PropsType) => {
     return (
         <>
             {
-                filter 
+                isFilter 
                 &&    
                 <Flex 
                     w='100%' 
