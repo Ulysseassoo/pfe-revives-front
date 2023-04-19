@@ -38,7 +38,11 @@ const About = () => {
 				</Box>
 			</Flex>
 
-			<TitleWithLogoBackground title='QUI SOMMES NOUS ?' subtitle='DÉBUT' />
+			<Box
+				paddingX={50}
+			>
+				<TitleWithLogoBackground title='QUI SOMMES NOUS ?' subtitle='DÉBUT' />
+			</Box>
 
 			<Flex
 				justifyContent='center'
