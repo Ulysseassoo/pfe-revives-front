@@ -7,59 +7,91 @@ import SeeMore from "@assets/Home/more.svg";
 const ShowShoesSection = () => {
 	return (
 		<Flex px={PADDING_DESKTOP} alignItems={"center"} justifyContent={"space-between"}>
-			<Center flexDir="column" height="270px" width="300px" border="1px solid black" p="8" boxShadow="black -10px 10px">
+			<Center
+				flexDir="column"
+				border="1px solid black"
+				p="8"
+				boxShadow="black -10px 10px"
+				maxWidth={["100%", "100%", "calc(50% - 20px)", "calc(25% - 20px)"]}
+			>
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box height="full" width="full">
+				<Box flex="1" minHeight="150px">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
 						objectFit="contain"
+						height="100%"
+						width="100%"
 					/>
 				</Box>
 			</Center>
 
-			<Center flexDir="column" height="270px" width="300px" border="1px solid black" p="8" boxShadow="black -10px 10px">
+			<Center
+				flexDir="column"
+				border="1px solid black"
+				p="8"
+				boxShadow="black -10px 10px"
+				maxWidth={["100%", "100%", "calc(50% - 20px)", "calc(25% - 20px)"]}
+			>
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box height="full" width="full">
+				<Box flex="1" minHeight="150px">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
 						objectFit="contain"
+						height="100%"
+						width="100%"
 					/>
 				</Box>
 			</Center>
 
-			<Center flexDir="column" height="270px" width="300px" border="1px solid black" p="8" boxShadow="black -10px 10px">
+			<Center
+				flexDir="column"
+				border="1px solid black"
+				p="8"
+				boxShadow="black -10px 10px"
+				maxWidth={["100%", "100%", "calc(50% - 20px)", "calc(25% - 20px)"]}
+			>
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box height="full" width="full">
+				<Box flex="1" minHeight="150px">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
 						objectFit="contain"
+						height="100%"
+						width="100%"
 					/>
 				</Box>
 			</Center>
 
-			<Center flexDir="column" height="270px" width="300px" border="1px solid black" p="8" boxShadow="black -10px 10px">
+			<Center
+				flexDir="column"
+				border="1px solid black"
+				p="8"
+				boxShadow="black -10px 10px"
+				maxWidth={["100%", "100%", "calc(50% - 20px)", "calc(25% - 20px)"]}
+			>
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box height="full" width="full">
+				<Box flex="1" minHeight="150px">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
 						objectFit="contain"
+						height="100%"
+						width="100%"
 					/>
 				</Box>
 			</Center>
 
-			<Grid
+			{/* <Grid
 				placeItems="center"
 				height="270px"
 				width="300px"
@@ -83,7 +115,7 @@ const ShowShoesSection = () => {
 				>
 					Voir plus
 				</Text>
-			</Grid>
+			</Grid> */}
 		</Flex>
 	);
 };
