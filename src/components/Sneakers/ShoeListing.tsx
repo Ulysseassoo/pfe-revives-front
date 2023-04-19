@@ -57,8 +57,9 @@ const ShoeListing = ({isFilter, shoes}: PropsType) => {
                             <Box 
                                 w='33%'
                                 marginBottom={10}
+                                key={index}
                             >
-                                <ShoeBox key={index} image={shoe.image} name={shoe.name} price={shoe.price} realPrice={shoe.realPrice} rate={shoe.rate} />
+                                <ShoeBox image={shoe.image} name={shoe.name} price={shoe.price} realPrice={shoe.realPrice} rate={shoe.rate} />
                             </Box>
                         )
                     })
