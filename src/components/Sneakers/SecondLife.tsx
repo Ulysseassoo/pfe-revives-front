@@ -1,9 +1,13 @@
 import React from 'react'
 import { Box, Flex, Image, Text, Button } from '@chakra-ui/react'
 
-import SecondLifeImage from '@assets/Sneakers/second-life.png'
+type Props = {
+    title: string
+    description: string
+    image: string
+}
 
-const SecondLife = () => {
+const SecondLife = ({title, description, image}: Props) => {
     return (
         <Flex
             flexDirection='column'
@@ -18,7 +22,7 @@ const SecondLife = () => {
                 fontSize={25}
                 marginBottom={10}
             >
-                Donner une seconde vie 
+                {title}
             </Text>
             <Flex>
                 <Flex
@@ -30,12 +34,12 @@ const SecondLife = () => {
                         marginRight={20}
                         position='relative'
                     >
-                        <Image 
-                            src={SecondLifeImage}
+                        <Image
+                            src={image}
                             position='relative'
                             zIndex={2}
                         />
-                        <Box 
+                        <Box
                             width='100%' 
                             height='100%'
                             position='absolute'
@@ -57,9 +61,7 @@ const SecondLife = () => {
                         width='70%'
                         color='white'
                     >
-                        Vous voulez porter vos anciennes sneakers
-                        mais elles sont trop usées. Grâce à nous vous
-                        pourrez les porter à nouveau.
+                        {description}
                     </Text>
                     <Button
                         background='#D4AA7D'
