@@ -8,6 +8,7 @@ import GlobalTheme from "./theme";
 import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";
+import SneakerDetail from '@pages/Sneakers/detail'
 
 // Fonts
 import "@fontsource/metropolis";
@@ -43,6 +44,10 @@ function App() {
 				{
 					path: "/sneakers",
 					element: <Sneakers />,
+				},
+				{
+					path: "/sneakers/:id",
+					element: <SneakerDetail />,
 				},
 				{
 					path: "/restauration",
