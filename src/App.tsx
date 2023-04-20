@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { io } from "socket.io-client";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import GlobalTheme from "./theme";
+import GlobalTheme from "./theme/theme";
 import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";

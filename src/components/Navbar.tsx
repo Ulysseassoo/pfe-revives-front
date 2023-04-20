@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Image, Input, Text } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { PADDING_DESKTOP } from "../theme";
+import { PADDING_DESKTOP } from "../theme/theme";
 import Logo from "../assets/logo.svg";
 import ArrowDown from "../assets/arrow-down.svg";
 import SearchButton from "../assets/search.svg";

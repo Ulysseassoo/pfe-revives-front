@@ -1,12 +1,12 @@
 import { Box, Center, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { PADDING_DESKTOP } from "@theme";
+import { PADDING_DESKTOP } from "@theme/theme";
 import Puma from "@assets/Home/Puma.png";
 import SeeMore from "@assets/Home/more.svg";
 
 const ShowShoesSection = () => {
 	return (
-		<Flex px={PADDING_DESKTOP} alignItems={"center"} justifyContent={"space-between"}>
+		<Flex px={PADDING_DESKTOP} alignItems={"center"} gap="20">
 			<Center
 				flexDir="column"
 				border="1px solid black"
@@ -17,7 +17,7 @@ const ShowShoesSection = () => {
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box flex="1" minHeight="150px">
+				<Box flex="1">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
@@ -38,7 +38,7 @@ const ShowShoesSection = () => {
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box flex="1" minHeight="150px">
+				<Box flex="1">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
@@ -59,7 +59,7 @@ const ShowShoesSection = () => {
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box flex="1" minHeight="150px">
+				<Box flex="1">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
@@ -80,7 +80,7 @@ const ShowShoesSection = () => {
 				<Text fontFamily={"heading"} fontWeight="extrabold" fontSize="1.75rem" position="relative" top="4">
 					Puma MB
 				</Text>
-				<Box flex="1" minHeight="150px">
+				<Box flex="1">
 					<Image
 						src={"https://images.footlocker.com/is/image/FLEU/314205387104_01?wid=2000&hei=2000&fmt=png-alpha"}
 						alt="shoe puma"
