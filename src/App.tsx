@@ -16,6 +16,7 @@ import "@fontsource/open-sans";
 import Contact from "./pages/Contact";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
+import Authentification from "@components/Authentification";
 
 function App() {
 	useEffect(() => {
@@ -73,7 +74,9 @@ function App() {
 
 	return (
 		<ChakraProvider theme={GlobalTheme}>
-			<RouterProvider router={router} />
+			<Authentification>
+				<RouterProvider router={router} />
+			</Authentification>
 		</ChakraProvider>
 	);
 }

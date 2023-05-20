@@ -19,6 +19,7 @@
 		"paths": {
 			"@components/*": ["src/components/*"],
 			"@services/*": ["src/services/*"],
+			"@store/*": ["src/store/*"],
 			"@assets/*": ["src/assets/*"],
 			"@pages/*": ["src/pages/*"],
 			"@dummyDatas/*": ["src/DummyDatas/*"],

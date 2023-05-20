@@ -7,8 +7,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormInput from "@components/Form/FormInput";
 import { HiOutlineMail } from "react-icons/hi";
 import { login } from "@services/Api/User";
+import useAuthStore from "@store/Auth";
 
 const LoginForm = () => {
+	const { setToken } = useAuthStore();
 	const [isMobile] = useMediaQuery("(max-width: 600px)");
 	const navigate = useNavigate();
 	const toast = useToast();
@@ -30,6 +32,7 @@ const LoginForm = () => {
 		try {
 			const { token } = await login(data);
 			localStorage.setItem("token", token);
+			setToken(token);
 			toast({
 				title: "Vous êtes connecté.",
 				description: "Vous allez être redirigé vers la page d'accueil",

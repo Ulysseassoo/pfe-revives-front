@@ -22,8 +22,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterFormData, registerSchema } from "@services/schemas/User";
 import { login, register } from "@services/Api/User";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "@store/Auth";
 
 const RegisterForm = () => {
+	const { setToken } = useAuthStore();
 	const [isMobile] = useMediaQuery("(max-width: 600px)");
 	const navigate = useNavigate();
 	const toast = useToast();
@@ -57,6 +59,7 @@ const RegisterForm = () => {
 				password: data.password,
 			});
 			localStorage.setItem("token", token);
+			setToken(token);
 			toast({
 				title: "Votre compte a été crée.",
 				description: "Vous allez être redirigé vers la page d'accueil",
