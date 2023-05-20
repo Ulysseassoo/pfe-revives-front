@@ -8,12 +8,13 @@ import GlobalTheme from "./theme";
 import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";
-import SneakerDetail from '@pages/Sneakers/detail'
+import SneakerDetail from "@pages/Sneakers/detail";
 
 // Fonts
 import "@fontsource/metropolis";
 import "@fontsource/open-sans";
 import Contact from "./pages/Contact";
+import Register from "@pages/Register";
 
 function App() {
 	useEffect(() => {
@@ -58,6 +59,10 @@ function App() {
 					element: <Contact />,
 				},
 			],
+		},
+		{
+			path: "/register",
+			element: <Register />,
 		},
 	]);
 
