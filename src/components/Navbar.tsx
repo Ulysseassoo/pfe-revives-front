@@ -1,6 +1,6 @@
 import { Box, Center, Flex, Image, Input, Text } from "@chakra-ui/react";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PADDING_DESKTOP } from "../theme";
 import Logo from "../assets/logo.svg";
 import ArrowDown from "../assets/arrow-down.svg";
@@ -33,6 +33,8 @@ const links = [
 ];
 
 const Navbar = () => {
+	const navigate = useNavigate();
+
 	return (
 		<Box as="nav">
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
@@ -49,7 +51,7 @@ const Navbar = () => {
 					</Flex>
 				</Box>
 				<Flex gap="10">
-					<Image src={Account} w="20px" />
+					<Image cursor={"pointer"} onClick={() => navigate("/register")} src={Account} w="20px" />
 					<Image src={Cart} w="20px" />
 					<Image src={Favorite} w="20px" />
 				</Flex>

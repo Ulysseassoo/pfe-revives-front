@@ -8,12 +8,15 @@ import GlobalTheme from "./theme";
 import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";
-import SneakerDetail from '@pages/Sneakers/detail'
+import SneakerDetail from "@pages/Sneakers/detail";
 
 // Fonts
 import "@fontsource/metropolis";
 import "@fontsource/open-sans";
 import Contact from "./pages/Contact";
+import Register from "@pages/Register";
+import Login from "@pages/Login";
+import Authentification from "@components/Authentification";
 
 function App() {
 	useEffect(() => {
@@ -59,11 +62,21 @@ function App() {
 				},
 			],
 		},
+		{
+			path: "/register",
+			element: <Register />,
+		},
+		{
+			path: "/login",
+			element: <Login />,
+		},
 	]);
 
 	return (
 		<ChakraProvider theme={GlobalTheme}>
-			<RouterProvider router={router} />
+			<Authentification>
+				<RouterProvider router={router} />
+			</Authentification>
 		</ChakraProvider>
 	);
 }

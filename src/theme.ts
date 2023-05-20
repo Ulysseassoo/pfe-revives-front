@@ -3,6 +3,7 @@ import { extendTheme } from "@chakra-ui/react";
 const GlobalTheme = extendTheme({
 	colors: {
 		primary: "#D4AA7D",
+		primaryHover: "#C09E79",
 	},
 	fonts: {
 		body: `'Open Sans', sans-serif`,
