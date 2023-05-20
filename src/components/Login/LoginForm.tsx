@@ -40,7 +40,14 @@ const LoginForm = () => {
 			});
 			navigate("/");
 		} catch (error: any) {
-			console.log(error);
+			toast({
+				title: "Une erreur est survenue.",
+				description: error.response.data.message || "Veuillez réessayer plus tard",
+				status: "error",
+				position: "top-right",
+				duration: 3000,
+				isClosable: true,
+			});
 		}
 	};
 
