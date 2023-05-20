@@ -8,6 +8,11 @@ export type RegisterFormData = {
 	confirmPassword: string;
 };
 
+export type LoginFormData = {
+	email: string;
+	password: string;
+};
+
 export const registerSchema = yup.object({
 	firstname: yup.string().required("Un prénom est requis."),
 	lastname: yup.string().required("Un nom est requis."),
@@ -20,4 +25,9 @@ export const registerSchema = yup.object({
 		.string()
 		.oneOf([yup.ref("password"), undefined], "Les mots de passe doivent correspondre")
 		.required("Un mot de passe qui correspond est requis"),
+});
+
+export const loginSchema = yup.object({
+	email: yup.string().required("Un email est requis."),
+	password: yup.string().required("Un mot de passe est requis"),
 });

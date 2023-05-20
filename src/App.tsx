@@ -15,6 +15,7 @@ import "@fontsource/metropolis";
 import "@fontsource/open-sans";
 import Contact from "./pages/Contact";
 import Register from "@pages/Register";
+import Login from "@pages/Login";
 
 function App() {
 	useEffect(() => {
@@ -63,6 +64,10 @@ function App() {
 		{
 			path: "/register",
 			element: <Register />,
+		},
+		{
+			path: "/login",
+			element: <Login />,
 		},
 	]);
 
