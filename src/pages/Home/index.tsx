@@ -6,6 +6,7 @@ import TitleWithLogoBackground from "@components/Common/TitleWithLogoBackground"
 import Catalog from "@components/Home/Catalog";
 import { PADDING_IPAD, PADDING_DESKTOP } from "@theme/theme";
 import CleaningSection from "@components/Home/CleaningSection";
+import MostSoldShoes from "@components/Home/MostSoldShoes";
 
 const Home = () => {
 	const [isSmallerThan890] = useMediaQuery("(max-width: 890px)");
@@ -13,7 +14,7 @@ const Home = () => {
 		<Flex gap="12vh" flexDir="column">
 			<Carousel />
 			<Center as="section" paddingX={isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}>
-				<Center flexDir="column" gap="6" maxW={isSmallerThan890 ? "90%" : "80%"}>
+				<Center flexDir="column" gap="4" maxW={isSmallerThan890 ? "90%" : "80%"}>
 					<Heading
 						textTransform={"uppercase"}
 						color="primary"
@@ -34,6 +35,7 @@ const Home = () => {
 			</Center>
 			<Catalog />
 			<CleaningSection />
+			<MostSoldShoes />
 		</Flex>
 	);
 };

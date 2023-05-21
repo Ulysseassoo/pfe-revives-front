@@ -1,4 +1,7 @@
 import { Box } from "@chakra-ui/react";
+import useParallax from "@hooks/useParallax";
+import { ChakraBox } from "@theme/theme";
+import { useScroll } from "framer-motion";
 import React from "react";
 
 interface Props {
@@ -9,11 +12,18 @@ interface Props {
 	right?: number | string;
 	bottom?: number | string;
 	initialBackground?: string;
+	containerRef: null | any;
 }
 
 const Square = (props: Props) => {
+	const { scrollYProgress } = useScroll({ target: props.containerRef });
+	const y = useParallax(scrollYProgress, 300);
+
 	return (
-		<Box
+		<ChakraBox
+			style={{
+				y,
+			}}
 			background="primary"
 			position="absolute"
 			transition="0.3s all ease"

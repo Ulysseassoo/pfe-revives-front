@@ -9,9 +9,13 @@ import { Link as ChakraLink } from "@chakra-ui/react";
 import StarActivate from "@assets/Common/Illustration/star-activate.svg";
 import StarDisable from "@assets/Common/Illustration/star-disable.svg";
 
-const Catalog = () => {
+interface Props {
+	numberOfShoes?: number;
+}
+
+const Catalog = ({ numberOfShoes }: Props) => {
 	const [isSmallerThan980] = useMediaQuery("(max-width: 980px)");
-	const shoesToDisplay = dummyShoes.slice(0, 8);
+	const shoesToDisplay = dummyShoes.slice(0, numberOfShoes ?? 8);
 	const discount = Math.round(((dummyShoes[0].realPrice - dummyShoes[0].price) / dummyShoes[0].realPrice) * 100);
 	return (
 		<Grid

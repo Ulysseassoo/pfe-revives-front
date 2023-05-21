@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, HStack, Heading, Image, Text, VStack, useMediaQuery } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import ShoeCleaning from "@assets/Home/shoe-cleaning.png";
 import Point from "@assets/Home/point.svg";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
@@ -7,10 +7,12 @@ import Square from "@components/Square";
 import Circle from "@components/Circle";
 
 const CleaningSection = () => {
+	const ref = useRef(null);
 	const [isSmallerThan980] = useMediaQuery("(max-width: 980px)");
 
 	return (
 		<Center
+			ref={ref}
 			maxW="100%"
 			paddingX={isSmallerThan980 ? PADDING_IPAD : PADDING_DESKTOP}
 			height={isSmallerThan980 ? "auto" : "600px"}
@@ -25,12 +27,14 @@ const CleaningSection = () => {
 				height={isSmallerThan980 ? "40px" : "50px"}
 				top={isSmallerThan980 ? "400px" : 10}
 				left={8}
+				containerRef={ref}
 			/>
 			<Circle
 				width={isSmallerThan980 ? "40px" : "50px"}
 				height={isSmallerThan980 ? "40px" : "50px"}
 				top={isSmallerThan980 ? 40 : 60}
 				right={14}
+				containerRef={ref}
 			/>
 			<Heading
 				as="h3"

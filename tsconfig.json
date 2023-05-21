@@ -24,7 +24,8 @@
 			"@pages/*": ["src/pages/*"],
 			"@dummyDatas/*": ["src/DummyDatas/*"],
 			"@inteface/*": ["src/interface/*"],
-			"@theme/*": ["src/theme/*"]
+			"@theme/*": ["src/theme/*"],
+			"@hooks/*": ["src/hooks/*"]
 		}
 	},
 	"include": ["src"],
