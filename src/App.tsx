@@ -4,19 +4,31 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { io } from "socket.io-client";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import GlobalTheme from "./theme";
+import GlobalTheme from "./theme/theme";
 import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";
 import SneakerDetail from "@pages/Sneakers/detail";
-
-// Fonts
-import "@fontsource/metropolis";
-import "@fontsource/open-sans";
 import Contact from "./pages/Contact";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
 import Authentification from "@components/Authentification";
+import { register } from "swiper/element/bundle";
+
+// Fonts
+import "@fontsource/metropolis/100.css";
+import "@fontsource/metropolis/200.css";
+import "@fontsource/metropolis/300.css";
+import "@fontsource/metropolis/400.css";
+import "@fontsource/metropolis/500.css";
+import "@fontsource/metropolis/600.css";
+import "@fontsource/metropolis/700.css";
+import "@fontsource/metropolis/800.css";
+import "@fontsource/metropolis/900.css";
+import "@fontsource-variable/open-sans/wdth-italic.css";
+
+// To be able to use swiper components slider
+register();
 
 function App() {
 	useEffect(() => {

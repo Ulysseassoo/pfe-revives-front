@@ -23,7 +23,9 @@
 			"@assets/*": ["src/assets/*"],
 			"@pages/*": ["src/pages/*"],
 			"@dummyDatas/*": ["src/DummyDatas/*"],
-			"@inteface/*": ["src/interface/*"]
+			"@inteface/*": ["src/interface/*"],
+			"@theme/*": ["src/theme/*"],
+			"@hooks/*": ["src/hooks/*"]
 		}
 	},
 	"include": ["src"],

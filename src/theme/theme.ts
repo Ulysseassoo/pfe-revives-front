@@ -1,4 +1,5 @@
-import { extendTheme } from "@chakra-ui/react";
+import { chakra, extendTheme, shouldForwardProp } from "@chakra-ui/react";
+import { motion, isValidMotionProp } from "framer-motion";
 
 const GlobalTheme = extendTheme({
 	colors: {
@@ -6,7 +7,7 @@ const GlobalTheme = extendTheme({
 		primaryHover: "#C09E79",
 	},
 	fonts: {
-		body: `'Open Sans', sans-serif`,
+		body: `'Open Sans Variable', sans-serif`,
 		heading: `'Metropolis', sans-serif`,
 	},
 	styles: {
@@ -41,6 +42,14 @@ const GlobalTheme = extendTheme({
 	},
 });
 
+export const ChakraBox = chakra(motion.div, {
+	/**
+	 * Allow motion props and non-Chakra props to be forwarded.
+	 */
+	shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+
 export const PADDING_DESKTOP = "6rem";
+export const PADDING_IPAD = "3rem";
 
 export default GlobalTheme;
