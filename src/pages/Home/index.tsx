@@ -5,13 +5,14 @@ import ShowShoesSection from "@components/Home/ShowShoesSection";
 import TitleWithLogoBackground from "@components/Common/TitleWithLogoBackground";
 import Catalog from "@components/Home/Catalog";
 import { PADDING_IPAD, PADDING_DESKTOP } from "@theme/theme";
+import CleaningSection from "@components/Home/CleaningSection";
 
 const Home = () => {
 	const [isSmallerThan890] = useMediaQuery("(max-width: 890px)");
 	return (
 		<Flex gap="12vh" flexDir="column">
 			<Carousel />
-			<Center paddingX={isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}>
+			<Center as="section" paddingX={isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}>
 				<Center flexDir="column" gap="6" maxW={isSmallerThan890 ? "90%" : "80%"}>
 					<Heading
 						textTransform={"uppercase"}
@@ -32,6 +33,7 @@ const Home = () => {
 				</Center>
 			</Center>
 			<Catalog />
+			<CleaningSection />
 		</Flex>
 	);
 };

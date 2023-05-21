@@ -29,7 +29,7 @@ const Carousel = () => {
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	return (
-		<Flex position="relative" overflow="hidden">
+		<Flex as="section" position="relative" overflow="hidden">
 			<Box
 				// @ts-ignore
 				as="swiper-container"

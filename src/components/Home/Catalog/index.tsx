@@ -10,7 +10,7 @@ import StarActivate from "@assets/Common/Illustration/star-activate.svg";
 import StarDisable from "@assets/Common/Illustration/star-disable.svg";
 
 const Catalog = () => {
-	const [isSmallerThan890] = useMediaQuery("(max-width: 890px)");
+	const [isSmallerThan980] = useMediaQuery("(max-width: 980px)");
 	const shoesToDisplay = dummyShoes.slice(0, 8);
 	const discount = Math.round(((dummyShoes[0].realPrice - dummyShoes[0].price) / dummyShoes[0].realPrice) * 100);
 	return (
@@ -22,7 +22,8 @@ const Catalog = () => {
 				md: "repeat(2,minmax(0,1fr))",
 				sm: "repeat(1,minmax(0,1fr))",
 			}}
-			paddingX={isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}
+			as="section"
+			paddingX={isSmallerThan980 ? PADDING_IPAD : PADDING_DESKTOP}
 		>
 			{shoesToDisplay.map((shoe, index) => (
 				<ChakraLink
