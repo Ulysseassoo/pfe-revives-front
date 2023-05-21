@@ -25,7 +25,7 @@ const CleaningSection = () => {
 			<Square
 				width={isSmallerThan980 ? "40px" : "50px"}
 				height={isSmallerThan980 ? "40px" : "50px"}
-				top={isSmallerThan980 ? "400px" : 10}
+				top={isSmallerThan980 ? "400px" : 80}
 				left={8}
 				containerRef={ref}
 			/>
