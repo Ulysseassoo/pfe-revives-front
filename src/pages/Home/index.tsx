@@ -7,6 +7,7 @@ import Catalog from "@components/Home/Catalog";
 import { PADDING_IPAD, PADDING_DESKTOP } from "@theme/theme";
 import CleaningSection from "@components/Home/CleaningSection";
 import MostSoldShoes from "@components/Home/MostSoldShoes";
+import Newsletter from "@components/Home/Newsletter";
 
 const Home = () => {
 	const [isSmallerThan890] = useMediaQuery("(max-width: 890px)");
@@ -36,6 +37,7 @@ const Home = () => {
 			<Catalog />
 			<CleaningSection />
 			<MostSoldShoes />
+			<Newsletter />
 		</Flex>
 	);
 };

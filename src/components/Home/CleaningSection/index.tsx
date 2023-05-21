@@ -48,7 +48,7 @@ const CleaningSection = () => {
 			>
 				Le nettoyage de sneakers evolue !
 			</Heading>
-			<Flex gap="6rem" alignItems="center" flexDir={isSmallerThan980 ? "column" : "row"}>
+			<Flex zIndex="4" position="relative" gap="6rem" alignItems="center" flexDir={isSmallerThan980 ? "column" : "row"}>
 				<Box flex="1">
 					<Image objectFit={"contain"} height="100%" w="100%" src={ShoeCleaning} alt="Shoe cleaning" />
 				</Box>
