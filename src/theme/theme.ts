@@ -42,5 +42,6 @@ const GlobalTheme = extendTheme({
 });
 
 export const PADDING_DESKTOP = "6rem";
+export const PADDING_IPAD = "3rem";
 
 export default GlobalTheme;
