@@ -37,7 +37,7 @@ const MostSoldShoes = () => {
 					</Text>
 				</Center>
 			</Center>
-			<Flex w="full" height="80vh" gap="8">
+			<Flex w="full" height="80vh" gap="8" flexDirection={isSmallerThan980 ? "column" : "row"}>
 				<Box flex="1">
 					<ChakraLink
 						as={Link}
@@ -58,7 +58,7 @@ const MostSoldShoes = () => {
 						key={`${dummyShoes[0].name}`}
 						pb="5"
 					>
-						<Center height="full" background="#F8F8F8">
+						<Center height={isSmallerThan980 ? "400px" : "full"} background="#F8F8F8">
 							<Center p="1rem">
 								<Image src={dummyShoes[0].image} height="auto" color="transparent" loading="lazy" decoding="async" />
 							</Center>
@@ -94,12 +94,11 @@ const MostSoldShoes = () => {
 					flex="1"
 					gap={"2rem"}
 					gridTemplateColumns={{
-						lg: "repeat(3,minmax(0,1fr))",
 						md: "repeat(2,minmax(0,1fr))",
 						sm: "repeat(1,minmax(0,1fr))",
 					}}
 				>
-					{dummyShoes.slice(0, 6).map((shoe, index) => (
+					{dummyShoes.slice(0, 4).map((shoe, index) => (
 						<ChakraLink
 							as={Link}
 							to="/shoe/jordan-1"

@@ -17,7 +17,7 @@ interface Props {
 
 const Square = (props: Props) => {
 	const { scrollYProgress } = useScroll({ target: props.containerRef });
-	const y = useParallax(scrollYProgress, 300);
+	const y = useParallax(scrollYProgress, 100);
 
 	return (
 		<ChakraBox
