@@ -42,8 +42,8 @@ const Catalog = () => {
 					key={`${shoe.name}${index}`}
 					pb="5"
 				>
-					<Center>
-						<Center p="1rem" background="#F8F8F8">
+					<Center height="300px" background="#F8F8F8">
+						<Center p="1rem">
 							<Image src={shoe.image} height="auto" color="transparent" loading="lazy" decoding="async" />
 						</Center>
 					</Center>

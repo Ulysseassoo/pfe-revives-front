@@ -9,6 +9,7 @@ import NavbarWrapper from "./components/NavbarWrapper";
 import Sneakers from "./pages/Sneakers";
 import Restauration from "./pages/Restauration";
 import SneakerDetail from "@pages/Sneakers/detail";
+import { register } from "swiper/element/bundle";
 
 // Fonts
 import "@fontsource/metropolis";
@@ -17,6 +18,9 @@ import Contact from "./pages/Contact";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
 import Authentification from "@components/Authentification";
+
+// To be able to use swiper components slider
+register();
 
 function App() {
 	useEffect(() => {

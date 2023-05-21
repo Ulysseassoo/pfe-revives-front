@@ -4,6 +4,8 @@ import Slide from "@assets/Home/Slide.png";
 import Slide2 from "@assets/Home/Slide2.jpg";
 import Slide3 from "@assets/Home/Slide3.jpg";
 import { AnimatePresence, isValidMotionProp, motion } from "framer-motion";
+import ShoeBox from "@components/Common/ShoeBox";
+import { Swiper, SwiperEvents } from "swiper/types";
 const items = [
 	{
 		image: Slide,
@@ -22,69 +24,53 @@ const items = [
 	},
 ];
 
-const slideVariants = {
-	enter: { x: "100%" },
-	center: { x: 0 },
-	exit: { x: "-100%" },
-};
-
 const Carousel = () => {
-	const [slidePage, setSlidePage] = useState<number>(0);
-	const actualSlide = items[slidePage];
-
-	const ChakraImage = chakra(motion.img, {
-		/**
-		 * Allow motion props and non-Chakra props to be forwarded.
-		 */
-		shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
-	});
-
-	// const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-	// useEffect(() => {
-	// 	intervalRef.current = setInterval(() => {
-	// 		setSlidePage((prevSlidePage) => (prevSlidePage + 1) % items.length);
-	// 	}, 3000);
-
-	// 	return () => {
-	// 		if (intervalRef.current) {
-	// 			clearInterval(intervalRef.current);
-	// 		}
-	// 	};
-	// }, [items.length]);
+	const swiperElRef = useRef<{ swiper: Swiper } | null>(null);
+	const [activeIndex, setActiveIndex] = useState(0);
 
 	return (
-		<Flex position="relative">
-			<Box height="595px" w="full" position="relative" overflow="hidden">
-				<AnimatePresence>
-					<ChakraImage
-						w='full'
-						h="full"
-						alt={actualSlide.alt}
-						src={actualSlide.image}
-						key={actualSlide.id}
-						objectFit='cover'
-						variants={slideVariants}
-						initial="enter"
-						animate="center"
-						exit="exit"
-						// @ts-ignore
-						transition={{ duration: 1.25 }}
-						position="absolute"
-						top="0"
-						left="0"
-					/>
-				</AnimatePresence>
+		<Flex position="relative" overflow="hidden">
+			<Box
+				// @ts-ignore
+				as="swiper-container"
+				ref={swiperElRef}
+				slides-per-view="1"
+				height="590px"
+				w="full"
+				position="relative"
+				overflow="hidden"
+			>
+				{items.map((item) => (
+					// @ts-ignore
+					<Box as="swiper-slide" key={item.id}>
+						<Box height="500px">
+							<Image
+								height="100%"
+								width="100%"
+								src={item.image}
+								alt={item.alt}
+								objectFit={"cover"}
+								objectPosition={"center"}
+							/>
+						</Box>
+					</Box>
+				))}
 			</Box>
-			<Box bottom="3" position="absolute" w="full" p="2">
+			<Box bottom="3" position="absolute" w="full" p="2" zIndex="99">
 				<Center gap="10px">
 					{[0, 1, 2].map((_, i) => (
 						<Circle
+							id={`cicle${i}`}
 							key={`cirlce${i}`}
-							onClick={() => setSlidePage(i)}
-							bg={actualSlide.id === i + 1 ? "primary" : "#434343"}
+							onClick={() => {
+								if (swiperElRef.current !== null) {
+									swiperElRef.current.swiper.slideTo(i);
+									setActiveIndex(i);
+								}
+							}}
+							bg={activeIndex === i ? "primary" : "#434343"}
 							cursor="pointer"
-							size='22.5px'
+							size="22.5px"
 						/>
 					))}
 				</Center>
