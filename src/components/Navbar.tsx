@@ -9,7 +9,7 @@ import Account from "../assets/account.svg";
 import Cart from "../assets/handbag-line.svg";
 import Favorite from "../assets/heart-line.svg";
 
-const links = [
+export const links = [
 	{
 		title: "Accueil",
 		to: "/",
