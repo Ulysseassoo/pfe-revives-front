@@ -25,6 +25,7 @@ const Authentification = ({ children }: Props) => {
 		const storageToken = localStorage.getItem("token");
 		if (storageToken !== null) {
 			validateToken();
+			setToken(storageToken);
 		}
 	}, [token]);
 
