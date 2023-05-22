@@ -1,13 +1,15 @@
-import { Box, Center, Flex, Image, Input, Text } from "@chakra-ui/react";
+import { Avatar, Box, Center, Flex, Icon, Image, Input, Text, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { PADDING_DESKTOP } from "../theme/theme";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme";
 import Logo from "../assets/logo.svg";
 import ArrowDown from "../assets/arrow-down.svg";
 import SearchButton from "../assets/search.svg";
 import Account from "../assets/account.svg";
 import Cart from "../assets/handbag-line.svg";
 import Favorite from "../assets/heart-line.svg";
+import { AiOutlineMenu } from "react-icons/ai";
+import useAuthStore from "@store/Auth";
 
 export const links = [
 	{
@@ -33,25 +35,81 @@ export const links = [
 ];
 
 const Navbar = () => {
+	const { isAuthenticated, user } = useAuthStore();
 	const navigate = useNavigate();
+	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
+	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
+
+	const NavAccount = () => {
+		if (isAuthenticated) {
+			return (
+				<Link to="/account">
+					<Avatar size="xs" bg="primary" name={`${user?.first_name} ${user?.last_name}`} cursor={"pointer"} />
+				</Link>
+			);
+		}
+
+		return <Image cursor={"pointer"} onClick={() => navigate("/register")} src={Account} w="20px" />;
+	};
+
+	const searchBar = () => {
+		return (
+			<Box background="#F8F8F8" w={isSmallerThan960 ? "full" : "initial"} borderRadius="full" h="full">
+				<Flex w="full" px="5" py="1" alignItems="center" gap="10px">
+					<Flex gap="2px">
+						<Text fontWeight={"semibold"}>Toutes les catégories</Text>
+						<Image src={ArrowDown} />
+					</Flex>
+					<Box as="span" h="24px" w="1px" background={"#838383"} />
+					<Input w="56" variant="unstyled" placeholder="Rechercher un produit..." />
+					<Image cursor={"pointer"} src={SearchButton} w="30px" />
+				</Flex>
+			</Box>
+		);
+	};
+
+	if (isSmallerThan960) {
+		return (
+			<Box as="nav">
+				<Flex w="full" py="4" px={PADDING_IPAD} justifyContent={"space-between"} alignItems="center" gap="20px">
+					<Icon as={AiOutlineMenu} boxSize={6} color="black" cursor={"pointer"} />
+					<Image src={Logo} w={"125px"} />
+
+					<Flex gap="6">
+						{NavAccount()}
+						<Image src={Cart} w="20px" />
+					</Flex>
+				</Flex>
+				<Box py="2" px={PADDING_IPAD} background="white" w={"full"} borderRadius="full" h="full">
+					<Flex w="full" py="1" alignItems="center" gap="10px">
+						<Flex gap="2px" alignItems="center">
+							<Text fontSize={isSmallerThan600 ? "xs" : "initial"} fontWeight={"semibold"}>
+								Toutes les catégories
+							</Text>
+							<Image src={ArrowDown} />
+						</Flex>
+						<Box as="span" h="24px" w="1px" background={"#838383"} />
+						<Input
+							fontSize={isSmallerThan600 ? "xs" : "initial"}
+							w="56"
+							flex="1"
+							variant="unstyled"
+							placeholder="Rechercher un produit..."
+						/>
+						<Image cursor={"pointer"} src={SearchButton} w="30px" />
+					</Flex>
+				</Box>
+			</Box>
+		);
+	}
 
 	return (
 		<Box as="nav">
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
-				<Image src={Logo} w="200px" />
-				<Box background="#F8F8F8" borderRadius="full" h="full">
-					<Flex w="full" px="5" py="1" alignItems="center" gap="10px">
-						<Flex gap="2px">
-							<Text fontWeight={"semibold"}>Toutes les catégories</Text>
-							<Image src={ArrowDown} />
-						</Flex>
-						<Box as="span" h="24px" w="1px" background={"#838383"} />
-						<Input w="56" variant="unstyled" placeholder="Rechercher un produit..." />
-						<Image src={SearchButton} w="30px" />
-					</Flex>
-				</Box>
+				<Image src={Logo} w={"200px"} />
+				{searchBar()}
 				<Flex gap="10">
-					<Image cursor={"pointer"} onClick={() => navigate("/register")} src={Account} w="20px" />
+					{NavAccount()}
 					<Image src={Cart} w="20px" />
 					<Image src={Favorite} w="20px" />
 				</Flex>
