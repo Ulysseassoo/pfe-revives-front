@@ -18,7 +18,7 @@ const LoginForm = () => {
 		control,
 		handleSubmit,
 		resetField,
-		formState: { errors, isLoading },
+		formState: { errors, isSubmitting },
 	} = useForm<LoginFormData>({
 		defaultValues: {
 			email: "",
@@ -102,8 +102,9 @@ const LoginForm = () => {
 				_hover={{
 					background: "primaryHover",
 				}}
+				borderRadius="none"
 				type="submit"
-				isLoading={isLoading}
+				isLoading={isSubmitting}
 			>
 				Se connecter
 			</Button>

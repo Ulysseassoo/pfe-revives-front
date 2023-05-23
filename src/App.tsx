@@ -25,7 +25,7 @@ import "@fontsource/metropolis/600.css";
 import "@fontsource/metropolis/700.css";
 import "@fontsource/metropolis/800.css";
 import "@fontsource/metropolis/900.css";
-import "@fontsource-variable/open-sans/wdth-italic.css";
+import "@fontsource-variable/open-sans/wdth.css";
 
 // To be able to use swiper components slider
 register();

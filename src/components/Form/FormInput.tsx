@@ -40,10 +40,12 @@ const FormInput = ({
 	return (
 		<FormControl isRequired={isRequired} isInvalid={Boolean(errorMessage)}>
 			<FormLabel>{label}</FormLabel>
-			<InputGroup>
+			<InputGroup boxShadow="sm">
 				<Input
-					border="1px solid black"
+					border="1px solid transparent"
+					borderColor="primary"
 					background={"#F3F3F3"}
+					borderRadius="none"
 					focusBorderColor="primary"
 					type={isShow ? "text" : isPassword ? "password" : "text"}
 					_placeholder={{

@@ -42,12 +42,32 @@ const NavMenu = ({ isOpen, onClose }: Props) => {
 				borderBottom="1px solid transparent"
 				borderColor="#E3E3E3"
 			>
-				<HStack spacing="2" alignItems="center">
+				<ChakraLink
+					as={Link}
+					style={{
+						textDecoration: "none",
+					}}
+					to="/login"
+					display="flex"
+					alignItems="center"
+					gap="2"
+				>
 					<Icon as={RiAccountPinCircleLine} cursor={"pointer"} boxSize={5} />
 					<Text fontSize="md">Se connecter</Text>
-				</HStack>
+				</ChakraLink>
 				<Flex gap="3" alignItems="center">
-					<Icon as={BsBag} boxSize={4} color="black" cursor={"pointer"} />
+					<ChakraLink
+						as={Link}
+						style={{
+							textDecoration: "none",
+						}}
+						to="/cart"
+						display="flex"
+						alignItems="center"
+						justifyContent="center"
+					>
+						<Icon as={BsBag} boxSize={4} color="black" cursor={"pointer"} />
+					</ChakraLink>
 					<Icon as={AiOutlineClose} onClick={onClose} boxSize={5} color="black" cursor={"pointer"} />
 				</Flex>
 			</Flex>
