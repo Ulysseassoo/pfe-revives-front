@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, useMediaQuery, useToast } from "@chakra-ui/react";
 import FormInput from "@components/Form/FormInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormData, schema } from "@services/schemas/Contact";
@@ -6,6 +6,8 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const ContactForm = () => {
+	const [isSmallerThan750] = useMediaQuery("(max-width: 750px)");
+
 	const toast = useToast();
 	const {
 		control,
@@ -48,7 +50,7 @@ const ContactForm = () => {
 
 	return (
 		<Flex gap="6" as="form" flexDir="column" onSubmit={handleSubmit(onSubmit)}>
-			<HStack spacing="4">
+			<Flex flexDir={isSmallerThan750 ? "column" : "row"} gap="4">
 				<Controller
 					name="lastname"
 					control={control}
@@ -75,7 +77,7 @@ const ContactForm = () => {
 						/>
 					)}
 				/>
-			</HStack>
+			</Flex>
 
 			<Controller
 				name="email"

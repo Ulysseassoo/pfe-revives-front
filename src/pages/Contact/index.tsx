@@ -26,19 +26,31 @@ const Contact = () => {
 
 				<Box zIndex={-1} position="absolute" top="0" left="0" h="full" w="full" background="#FBFBFB" opacity="0.7" />
 
-				<Heading position="relative" zIndex={2} fontSize="5xl" as="h2">
+				<Heading
+					position="relative"
+					zIndex={2}
+					fontSize={isSmallerThan600 ? "xl" : isSmallerThan890 ? "3xl" : "5xl"}
+					as="h2"
+					px="4"
+				>
 					Contactez-nous
 				</Heading>
-				<Text position="relative" zIndex={2} fontSize="xl">
+				<Text
+					px="4"
+					textAlign="center"
+					position="relative"
+					zIndex={2}
+					fontSize={isSmallerThan600 ? "md" : isSmallerThan890 ? "lg" : "xl"}
+				>
 					Nous vous répondrons dans les plus brefs délais
 				</Text>
 			</Center>
 
-			<Flex>
-				<Box flex="70%" px={"32"}>
+			<Flex flexDir={isSmallerThan890 ? "column-reverse" : "row"} gap={isSmallerThan890 ? "6" : 0}>
+				<Box flex="70%" px={isSmallerThan600 ? "8" : "24"}>
 					<ContactForm />
 				</Box>
-				<Box flex="30%" display="flex" flexDir="column" gap="4" px={"32"}>
+				<Box flex="30%" display="flex" flexDir="column" gap="4" px={isSmallerThan600 ? "8" : "24"}>
 					<Box>
 						<Text mb="2" fontWeight="semibold">
 							Addresse
@@ -66,21 +78,24 @@ const Contact = () => {
 			<Box>
 				<Box
 					background="linear-gradient(90deg, rgba(236,212,186,1) 0%, rgba(235,206,175,0.7019140419839811) 100%)"
-					height="50vh"
+					height={isSmallerThan600 ? "auto" : "50vh"}
 					position="relative"
 					p="4"
 					pt="8"
+					display="flex"
+					justifyContent="center"
+					alignItems="center"
 				>
 					<Center
 						paddingX={isSmallerThan600 ? "0.65rem" : isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}
 						position="relative"
 						zIndex={4}
 					>
-						<Center flexDir="column" gap="8" maxW="50%">
-							<Heading fontSize="3xl" textAlign="center" as="h3">
+						<Center flexDir="column" gap="8" maxW={isSmallerThan600 ? "full" : isSmallerThan890 ? "75%" : "50%"}>
+							<Heading fontSize={isSmallerThan600 ? "xl" : isSmallerThan890 ? "2xl" : "3xl"} textAlign="center" as="h3">
 								Créer votre compte maintenant !
 							</Heading>
-							<Text fontSize="lg" textAlign="center">
+							<Text fontSize={isSmallerThan600 ? "md" : "lg"} textAlign="center">
 								Si vous souhaitez bénéficier des services de restauration de sneakers de qualité, vous pouvez vous
 								inscrire à Revive's pour redonner vie à vos chaussures préférées.
 							</Text>
