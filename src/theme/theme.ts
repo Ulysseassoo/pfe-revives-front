@@ -50,6 +50,6 @@ export const ChakraBox = chakra(motion.div, {
 });
 
 export const PADDING_DESKTOP = "6rem";
-export const PADDING_IPAD = "3rem";
+export const PADDING_IPAD = "2rem";
 
 export default GlobalTheme;

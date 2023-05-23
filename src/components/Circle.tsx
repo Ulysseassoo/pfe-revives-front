@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Circle = (props: Props) => {
-	const { scrollYProgress } = useScroll({ target: props.containerRef });
+	const { scrollYProgress } = useScroll({ target: props.containerRef, layoutEffect: false });
 	const y = useParallax(scrollYProgress, 10);
 
 	return (
