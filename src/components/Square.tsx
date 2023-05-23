@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Square = (props: Props) => {
-	const { scrollYProgress } = useScroll({ target: props.containerRef });
+	const { scrollYProgress } = useScroll({ target: props.containerRef, layoutEffect: false });
 	const y = useParallax(scrollYProgress, 100);
 
 	return (

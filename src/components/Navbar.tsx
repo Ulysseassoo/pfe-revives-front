@@ -1,4 +1,4 @@
-import { Avatar, Box, Center, Flex, Icon, Image, Input, Text, useMediaQuery } from "@chakra-ui/react";
+import { Avatar, Box, Center, Flex, Icon, Image, Input, Text, useDisclosure, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme";
@@ -8,8 +8,9 @@ import SearchButton from "../assets/search.svg";
 import Account from "../assets/account.svg";
 import Cart from "../assets/handbag-line.svg";
 import Favorite from "../assets/heart-line.svg";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import useAuthStore from "@store/Auth";
+import NavMenu from "./NavMenu";
 
 export const links = [
 	{
@@ -39,6 +40,11 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const handleClose = () => {
+		document.body.style.overflow = "initial";
+		onClose();
+	};
 
 	const NavAccount = () => {
 		if (isAuthenticated) {
@@ -72,7 +78,16 @@ const Navbar = () => {
 		return (
 			<Box as="nav">
 				<Flex w="full" py="4" px={PADDING_IPAD} justifyContent={"space-between"} alignItems="center" gap="20px">
-					<Icon as={AiOutlineMenu} boxSize={6} color="black" cursor={"pointer"} />
+					<Icon
+						as={AiOutlineMenu}
+						onClick={() => {
+							document.body.style.overflow = "hidden";
+							onOpen();
+						}}
+						boxSize={6}
+						color="black"
+						cursor={"pointer"}
+					/>
 					<Image src={Logo} w={"125px"} />
 
 					<Flex gap="6">
@@ -99,6 +114,7 @@ const Navbar = () => {
 						<Image cursor={"pointer"} src={SearchButton} w="30px" />
 					</Flex>
 				</Box>
+				<NavMenu onClose={handleClose} isOpen={isOpen} />
 			</Box>
 		);
 	}
