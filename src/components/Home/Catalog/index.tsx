@@ -32,7 +32,7 @@ const Catalog = ({ numberOfShoes }: Props) => {
 			{shoesToDisplay.map((shoe, index) => (
 				<ChakraLink
 					as={Link}
-					to="/shoe/jordan-1"
+					to={`sneakers/${shoe.name}`}
 					transitionDuration={"0.2s"}
 					display="flex"
 					flexDirection="column"
@@ -47,7 +47,7 @@ const Catalog = ({ numberOfShoes }: Props) => {
 					key={`${shoe.name}${index}`}
 					pb="5"
 				>
-					<Center height="300px" background="#F8F8F8">
+					<Center overflow="hidden" height="300px" background="#F8F8F8">
 						<Center p="1rem">
 							<Image src={shoe.image} height="auto" color="transparent" loading="lazy" decoding="async" />
 						</Center>

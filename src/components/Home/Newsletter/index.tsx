@@ -19,16 +19,16 @@ const Newsletter = () => {
 	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
 
 	return (
-		<Box paddingX={isSmallerThan600 ? 0 : isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP} as="section">
+		<Box as="section">
 			<Flex
 				background="linear-gradient(90deg, rgba(236,212,186,1) 0%, rgba(235,206,175,0.7019140419839811) 100%)"
 				height="40vh"
 				position="relative"
+				paddingX={isSmallerThan600 ? 8 : isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}
 			>
 				<Center
 					flexDir="column"
 					gap="3rem"
-					paddingX={isSmallerThan600 ? "0.65rem" : isSmallerThan890 ? PADDING_IPAD : PADDING_DESKTOP}
 					maxW={{ xl: "50%", lg: "70%", md: "full", sm: "full", base: "full" }}
 					position="relative"
 					zIndex={4}
