@@ -15,6 +15,7 @@ import SneakerDetail4 from "@assets/Sneakers/sneaker-detail-4.png";
 import Footer from "@components/Footer";
 import Newsletter from "@components/Home/Newsletter";
 import { Box } from "@chakra-ui/react";
+import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
 
 const detail = () => {
 	const { id } = useParams();
@@ -61,18 +62,20 @@ const detail = () => {
 	const photos = [SneakerDetail1, SneakerDetail2, SneakerDetail3, SneakerDetail4];
 
 	return (
-		<div>
-			<SneakerDetail
-				title="Adidas ozweego white and black"
-				description="Inspirée des chaussures de running vintage, ce modèle junior twiste le style des nineties. La tige en textile et cuir à chausson intégré épouse parfaitement la forme du pied pour plus de souplesse. Elle est dotée d'une semelle intermédiaire en EVA légère pour plus de confort et une bonne absorption des chocs."
-				price={100}
-				sizes={sizes}
-				rate={4}
-				photos={photos}
-			/>
+		<Box as="section">
+			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
+				<SneakerDetail
+					title="Adidas ozweego white and black"
+					description="Inspirée des chaussures de running vintage, ce modèle junior twiste le style des nineties. La tige en textile et cuir à chausson intégré épouse parfaitement la forme du pied pour plus de souplesse. Elle est dotée d'une semelle intermédiaire en EVA légère pour plus de confort et une bonne absorption des chocs."
+					price={100}
+					sizes={sizes}
+					rate={4}
+					photos={photos}
+				/>
 
-			<SneakerCategory title="Vous aimerez aussi" nbrOfShoe={3} />
-			<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} />
+				<SneakerCategory title="Vous aimerez aussi" nbrOfShoe={3} />
+				<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} />
+			</Box>
 
 			<SecondLife
 				title="Donnez une seconde vie à vos sneakers"
@@ -84,7 +87,7 @@ const detail = () => {
 				<Newsletter />
 			</Box>
 			<Footer />
-		</div>
+		</Box>
 	);
 };
 

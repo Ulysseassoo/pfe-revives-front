@@ -24,7 +24,7 @@ type Sizes = {
 const SneakerDetail = (shoe: ShoeProps) => {
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	return (
-		<Flex flexDirection="column" paddingX={isSmallerThan960 ? PADDING_IPAD : PADDING_DESKTOP} marginY={10}>
+		<Flex flexDirection="column" marginY={10}>
 			<Flex
 				gap={isSmallerThan960 ? "16" : 0}
 				flexDir={isSmallerThan960 ? "column" : "row"}
