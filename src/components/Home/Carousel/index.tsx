@@ -28,6 +28,14 @@ const Carousel = () => {
 	const swiperElRef = useRef<{ swiper: Swiper } | null>(null);
 	const [activeIndex, setActiveIndex] = useState(0);
 
+	useEffect(() => {
+		if (swiperElRef.current !== null) {
+			swiperElRef.current.swiper.on("slideChange", (e) => {
+				setActiveIndex(e.activeIndex);
+			});
+		}
+	}, []);
+
 	return (
 		<Flex as="section" position="relative" overflow="hidden">
 			<Box
