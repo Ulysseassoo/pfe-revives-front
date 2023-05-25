@@ -3,15 +3,32 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { host } from "@services/Api";
 
 interface ProductsQueryParams {
-	model?: string;
-	gte?: string;
-	gt?: string;
-	lte?: string;
-	lt?: string;
+	model: string;
+	gte?: number;
+	gt?: number;
+	lte?: number;
+	lt?: number;
 	size?: number;
 	brand?: string;
 	color?: string;
+	take?: string;
+	rate?: string;
 }
+
+const buildUrl = (params: ProductsQueryParams) => {
+	let url = `?&model=${params.model}`;
+	if (params.gt) {
+		url += `&gt=${params.gt}`;
+	}
+	if (params.take) {
+		url += `&take=${params.take}`;
+	}
+	if (params.rate) {
+		url += `&rate=${params.rate}`;
+	}
+
+	return url;
+};
 
 export const shoesApi = createApi({
 	reducerPath: "shoesApi",
@@ -26,13 +43,13 @@ export const shoesApi = createApi({
 		credentials: "same-origin", // This allows server to set cookies,
 	}),
 	endpoints: (builder) => ({
-		listShoes: builder.query<ShoeInterface[], ProductsQueryParams>({
-			query: ({ model, gte, gt, lte, lt, size, brand, color }) => (model !== undefined ? `/${model}` : ""),
+		listShoes: builder.query<{ data: ShoeInterface[] }, ProductsQueryParams>({
+			query: (params) => buildUrl(params),
 			providesTags: (result) =>
 				// is result available?
-				result
+				result?.data
 					? // successful query
-					  [...result.map(({ shoe_id }) => ({ type: "Shoes", shoe_id }) as const), { type: "Shoes", id: "LIST" }]
+					  [...result.data.map(({ shoe_id }) => ({ type: "Shoes", shoe_id }) as const), { type: "Shoes", id: "LIST" }]
 					: // an error occurred, but we still want to refetch this query when `{ type: 'Shoes', id: 'LIST' }` is invalidated
 					  [{ type: "Shoes", id: "LIST" }],
 		}),

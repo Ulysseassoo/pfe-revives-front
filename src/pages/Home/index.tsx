@@ -35,7 +35,7 @@ const Home = () => {
 					</Text>
 				</Center>
 			</Center>
-			<Catalog />
+			<Catalog numberOfShoes={8} />
 			<CleaningSection />
 			<MostSoldShoes />
 			<Newsletter />

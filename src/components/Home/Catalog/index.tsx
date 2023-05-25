@@ -4,14 +4,23 @@ import React from "react";
 
 import ShoeLinkBox from "@components/Common/ShoeLinkBox";
 import { Grid, useMediaQuery } from "@chakra-ui/react";
+import { useListShoesQuery } from "@store/api/Shoes";
 
 interface Props {
 	numberOfShoes?: number;
 }
 
-const Catalog = ({ numberOfShoes }: Props) => {
+const Catalog = ({ numberOfShoes = 8 }: Props) => {
+	const { data } = useListShoesQuery({
+		model: "Jordan",
+		take: numberOfShoes.toString(),
+		rate: "2",
+	});
 	const [isSmallerThan980] = useMediaQuery("(max-width: 980px)");
-	const shoesToDisplay = dummyShoes.slice(0, numberOfShoes ?? 8);
+	if (!data) {
+		return <></>;
+	}
+
 	return (
 		<Grid
 			gap={"2rem"}
@@ -24,8 +33,8 @@ const Catalog = ({ numberOfShoes }: Props) => {
 			as="section"
 			paddingX={isSmallerThan980 ? PADDING_IPAD : PADDING_DESKTOP}
 		>
-			{shoesToDisplay.map((shoe, index) => (
-				<ShoeLinkBox {...shoe} key={`${shoe.name}${index}`} />
+			{data.data.map((shoe) => (
+				<ShoeLinkBox {...shoe} key={`${shoe.shoe_id}`} />
 			))}
 		</Grid>
 	);
