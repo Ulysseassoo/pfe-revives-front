@@ -9,8 +9,9 @@ import Account from "../assets/account.svg";
 import Cart from "../assets/handbag-line.svg";
 import Favorite from "../assets/heart-line.svg";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import useAuthStore from "@store/Auth";
+import useAuthStore from "@store/reducers/Auth";
 import NavMenu from "./NavMenu";
+import { useAppSelector } from "@store/hooks";
 
 export const links = [
 	{
@@ -36,7 +37,7 @@ export const links = [
 ];
 
 const Navbar = () => {
-	const { isAuthenticated, user } = useAuthStore();
+	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");

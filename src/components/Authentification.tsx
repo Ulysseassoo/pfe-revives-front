@@ -1,5 +1,6 @@
 import { getUserInformations } from "@services/Api/User";
-import useAuthStore from "@store/Auth";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import useAuthStore, { setToken, setUser } from "@store/reducers/Auth";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -7,20 +8,21 @@ interface Props {
 }
 
 const Authentification = ({ children }: Props) => {
-	const { setUser, token, setToken } = useAuthStore();
+	const { token } = useAppSelector((state) => state.auth);
+	const dispatch = useAppDispatch();
 
 	const validateToken = async () => {
 		const storageToken = localStorage.getItem("token");
 		if (storageToken !== null) {
 			try {
 				const user = await getUserInformations();
-				setUser(user);
-				setToken(storageToken);
+				dispatch(setUser(user));
+				dispatch(setToken(storageToken));
 			} catch (error) {
 				// TODO Check if we are in protected pages
 				localStorage.removeItem("token");
-				setUser(null);
-				setToken(null);
+				dispatch(setUser(null));
+				dispatch(setToken(null));
 			}
 		}
 	};
