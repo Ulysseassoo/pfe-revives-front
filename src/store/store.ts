@@ -1,15 +1,17 @@
 import { Action, AnyAction, combineReducers, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import authReducer from "./reducers/Auth";
 import cartReducer from "./reducers/Cart";
+import { shoesApi } from "./api/Shoes";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
 	cart: cartReducer,
-	// [contactApi.reducerPath]: contactApi.reducer,
+	[shoesApi.reducerPath]: shoesApi.reducer,
 });
 
 export const store = configureStore({
 	reducer: rootReducer,
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(shoesApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

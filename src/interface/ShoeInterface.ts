@@ -1,8 +1,18 @@
+import { PhotoInterface } from "./PhotoInterface";
+
 export interface ShoeInterface {
-	name: string;
+	shoe_id: number;
+	brand: string;
+	model: string;
+	color: string;
+	size: number;
+	status: string;
 	price: number;
-	realPrice: number;
+	real_price: number;
 	rate: number;
-	image: string;
-	images: string[];
+	description: string;
+	user_id?: number;
+	created_at: Date;
+	is_validate: boolean;
+	Photo: PhotoInterface[];
 }
