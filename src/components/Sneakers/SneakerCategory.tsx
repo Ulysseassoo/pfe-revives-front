@@ -4,14 +4,23 @@ import { Box, Flex, Image, Text, Input } from "@chakra-ui/react";
 import ShoeListing from "./ShoeListing";
 
 import { dummyShoes } from "@dummyDatas/Shoes";
+import { useListShoesQuery } from "@store/api/Shoes";
 
 type Props = {
 	title: string;
 	nbrOfShoe: number;
+	rate: string;
 };
 
-const SneakerCategory = ({ title, nbrOfShoe }: Props) => {
-	const shoesToDisplay = dummyShoes.slice(0, nbrOfShoe);
+const SneakerCategory = ({ title, nbrOfShoe, rate }: Props) => {
+	const { data } = useListShoesQuery({
+		model: "Jordan",
+		take: nbrOfShoe.toString(),
+		rate,
+	});
+
+	if (!data) return <></>;
+
 	return (
 		<Flex flexDirection="column">
 			<Box marginBottom={5}>
@@ -20,7 +29,7 @@ const SneakerCategory = ({ title, nbrOfShoe }: Props) => {
 				</Text>
 			</Box>
 
-			<ShoeListing isFilter={false} shoes={shoesToDisplay} />
+			<ShoeListing isFilter={false} shoes={data.data} />
 		</Flex>
 	);
 };

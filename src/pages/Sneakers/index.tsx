@@ -1,26 +1,30 @@
-import React from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import TitleWithLogoBackground from "@components/Common/TitleWithLogoBackground";
 import ShoeListing from "@components/Sneakers/ShoeListing";
 import SecondLife from "@components/Sneakers/SecondLife";
 import SneakerCategory from "@components/Sneakers/SneakerCategory";
-import SneakerFooter from "@components/Sneakers/SneakerFooter";
-
-import { dummyShoes } from "@dummyDatas/Shoes";
 
 import SecondLifeImage from "@assets/Sneakers/second-life.png";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
 import Newsletter from "@components/Home/Newsletter";
 import Footer from "@components/Footer";
+import { useListShoesQuery } from "@store/api/Shoes";
 
 const Sneakers = () => {
+	const { data } = useListShoesQuery({
+		model: "Jordan",
+		take: "20",
+	});
+
+	if (!data) return <></>;
+
 	return (
 		<Box as="section">
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
 				<Box>
 					<TitleWithLogoBackground title="NOS SNEAKERS PRÉFÉRÉES" subtitle="PRODUIT" />
-					<ShoeListing isFilter={true} shoes={dummyShoes} />
+					<ShoeListing isFilter={true} shoes={data.data} />
 				</Box>
 			</Box>
 			<SecondLife
@@ -29,8 +33,8 @@ const Sneakers = () => {
 				image={SecondLifeImage}
 			/>
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }} mt="8">
-				<SneakerCategory title="Les mieux notés" nbrOfShoe={3} />
-				<SneakerCategory title="Les bons plans" nbrOfShoe={3} />
+				<SneakerCategory title="Les mieux notés" nbrOfShoe={3} rate="3" />
+				<SneakerCategory title="Les bons plans" nbrOfShoe={3} rate="2" />
 			</Box>
 			<Newsletter />
 			<Footer />
