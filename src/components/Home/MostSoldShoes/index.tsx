@@ -37,12 +37,7 @@ const MostSoldShoes = () => {
 					</Text>
 				</Center>
 			</Center>
-			<Flex
-				w="full"
-				height={isSmallerThan980 ? "auto" : "80vh"}
-				gap="8"
-				flexDirection={isSmallerThan980 ? "column" : "row"}
-			>
+			<Flex w="full" gap="8" flexDirection={isSmallerThan980 ? "column" : "row"}>
 				<Box flex="1">
 					<ChakraLink
 						as={Link}

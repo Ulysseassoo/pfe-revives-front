@@ -1,7 +1,8 @@
 export interface ShoeInterface {
-    name: string
-    price: number
-    realPrice: number
-    rate: number
-    image: string
+	name: string;
+	price: number;
+	realPrice: number;
+	rate: number;
+	image: string;
+	images: string[];
 }

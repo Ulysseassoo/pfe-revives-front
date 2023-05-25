@@ -7,6 +7,7 @@ import FilterLogo from "@assets/Common/Illustration/filter-logo.svg";
 import ArrowDown from "@assets/arrow-down.svg";
 
 import ShoeBox from "@components/Common/ShoeBox";
+import ShoeLinkBox from "@components/Common/ShoeLinkBox";
 
 type PropsType = {
 	isFilter: boolean;
@@ -41,13 +42,7 @@ const ShoeListing = ({ isFilter, shoes }: PropsType) => {
 				{shoes.map((shoe, index) => {
 					return (
 						<Box w="full" key={`${shoe.name}${index}`}>
-							<ShoeBox
-								image={shoe.image}
-								name={shoe.name}
-								price={shoe.price}
-								realPrice={shoe.realPrice}
-								rate={shoe.rate}
-							/>
+							<ShoeLinkBox {...shoe} />
 						</Box>
 					);
 				})}
