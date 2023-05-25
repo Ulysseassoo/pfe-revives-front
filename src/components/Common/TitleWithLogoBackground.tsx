@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
 
 import ReviveTitleBackground from "./../../assets/About/revive-title-background.png";
 import { PADDING_DESKTOP } from "@theme/theme";
@@ -11,17 +11,30 @@ type PropsType = {
 
 const TitleWithLogoBackground = ({ title, subtitle }: PropsType) => {
 	return (
-		<Flex position='relative' marginY={25} paddingX={PADDING_DESKTOP}>
-			<Image src={ReviveTitleBackground} paddingY={5} />
-			<Box position='absolute' left="50%" top="65%" transform="translate(-50%, -50%)" textAlign='center'>
-				<Text color='#000000' textTransform={"uppercase"} fontSize={"7xl"} fontWeight="black" fontFamily="heading">
+		<Grid gridTemplateColumns={"1fr 1fr "} gridTemplateRows="1fr 1fr" position="relative" marginY="4">
+			<Image gridArea=" 1 / 1 / 3 / 3 " src={ReviveTitleBackground} paddingBottom={5} />
+			<Center flexDir="column" gridArea=" 1 / 1 / 3 / 3 " textAlign="center">
+				<Heading
+					as="h2"
+					color="#000000"
+					textTransform={"uppercase"}
+					fontSize={{ lg: "6xl", md: "4xl", base: "3xl" }}
+					fontWeight="black"
+					fontFamily="heading"
+				>
 					{title}
-				</Text>
-				<Text color='#D4AA7D' textTransform="uppercase" fontSize={"4xl"} fontWeight='black' fontFamily="heading">
+				</Heading>
+				<Text
+					color="#D4AA7D"
+					textTransform="uppercase"
+					fontSize={{ lg: "3xl", md: "3xm", base: "2xl" }}
+					fontWeight="black"
+					fontFamily="heading"
+				>
 					{subtitle}
 				</Text>
-			</Box>
-		</Flex>
+			</Center>
+		</Grid>
 	);
 };
 
