@@ -1,5 +1,17 @@
-import { Avatar, Box, Center, Flex, Icon, Image, Input, Text, useDisclosure, useMediaQuery } from "@chakra-ui/react";
-import React from "react";
+import {
+	Avatar,
+	Box,
+	Center,
+	Flex,
+	Icon,
+	Image,
+	Input,
+	Text,
+	useDisclosure,
+	useMediaQuery,
+	Link as ChakraLink,
+	Circle,
+} from "@chakra-ui/react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme";
 import Logo from "../assets/logo.svg";
@@ -8,10 +20,10 @@ import SearchButton from "../assets/search.svg";
 import Account from "../assets/account.svg";
 import Cart from "../assets/handbag-line.svg";
 import Favorite from "../assets/heart-line.svg";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import useAuthStore from "@store/reducers/Auth";
+import { AiOutlineMenu } from "react-icons/ai";
 import NavMenu from "./NavMenu";
 import { useAppSelector } from "@store/hooks";
+import { BsBag, BsHeart } from "react-icons/bs";
 
 export const links = [
 	{
@@ -125,10 +137,66 @@ const Navbar = () => {
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
 				<Image src={Logo} w={"200px"} />
 				{searchBar()}
-				<Flex gap="10">
+				<Flex gap="4" alignItems={"center"}>
 					{NavAccount()}
-					<Image src={Cart} w="20px" />
-					<Image src={Favorite} w="20px" />
+					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/cart">
+						<Center
+							position="relative"
+							_before={{
+								content: `""`,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								width: "full",
+								height: "full",
+								borderRadius: "full",
+								background: "transparent",
+								zIndex: -1,
+								transition: "0.3s ease all",
+							}}
+							transition="0.3s ease all"
+							_hover={{
+								_before: {
+									background: "blackAlpha.200",
+								},
+							}}
+							h="30px"
+							w="30px"
+						>
+							<Icon as={BsBag} boxSize={4} />
+						</Center>
+					</ChakraLink>
+					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/favorites">
+						<Center
+							position="relative"
+							_before={{
+								content: `""`,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								width: "full",
+								height: "full",
+								borderRadius: "full",
+								background: "transparent",
+								zIndex: -1,
+								transition: "0.3s ease all",
+							}}
+							transition="0.3s ease all"
+							_hover={{
+								_before: {
+									background: "blackAlpha.200",
+								},
+							}}
+							h="30px"
+							w="30px"
+						>
+							<Icon as={BsHeart} boxSize={4} />
+						</Center>
+					</ChakraLink>
 				</Flex>
 			</Flex>
 			<Center gap="50" p="5" borderTop="1px solid #E3E3E3">

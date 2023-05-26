@@ -64,12 +64,12 @@ const SneakerDetail = (shoe: ShoeProps) => {
 						{Array(shoe.rate)
 							.fill(null)
 							.map((a, index) => {
-								return <Image width={25} height={25} key={index} src={StarActivate} />;
+								return <Image width={25} height={25} key={`star${index}`} src={StarActivate} />;
 							})}
 						{Array(5 - shoe.rate)
 							.fill(null)
 							.map((a, index) => {
-								return <Image width={25} height={25} key={index} src={StarDisable} />;
+								return <Image width={25} height={25} key={`star${index}`} src={StarDisable} />;
 							})}
 					</Flex>
 
@@ -81,7 +81,7 @@ const SneakerDetail = (shoe: ShoeProps) => {
 							{shoe.sizes.map((size, index) => {
 								return (
 									<Button
-										key={index}
+										key={size.size}
 										background="#F6F6F6"
 										width="80px"
 										height="40px"
@@ -108,10 +108,27 @@ const SneakerDetail = (shoe: ShoeProps) => {
 					</Flex>
 
 					<Flex gap={5}>
-						<Button background="#D4AA7D" color="white" borderRadius={5}>
-							Acheter
+						<Button
+							background="#D4AA7D"
+							color="white"
+							borderRadius={5}
+							_hover={{
+								background: "primaryHover",
+							}}
+						>
+							Ajouter au panier
 						</Button>
-						<Button borderColor="#D4AA7D" borderWidth={1} color="#D4AA7D" background="white" borderRadius={5}>
+						<Button
+							borderColor="gray.200"
+							_hover={{
+								borderColor: "primary",
+								background: "white",
+							}}
+							borderWidth={1}
+							color="#D4AA7D"
+							background="white"
+							borderRadius={5}
+						>
 							Ajouter aux favoris
 						</Button>
 					</Flex>
