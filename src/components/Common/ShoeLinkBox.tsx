@@ -4,6 +4,7 @@ import StarActivate from "@assets/Common/Illustration/star-activate.svg";
 import StarDisable from "@assets/Common/Illustration/star-disable.svg";
 import { Center, Flex, Image, Text } from "@chakra-ui/react";
 import { ShoeInterface } from "@inteface/ShoeInterface";
+import ShoeImgDefault from "@assets/Sneakers/sneaker-detail-1.png";
 
 const ShoeLinkBox = ({ Photo, price, real_price, model, rate }: ShoeInterface) => {
 	const discount = Math.round(((real_price - price) / real_price) * 100);
@@ -11,7 +12,7 @@ const ShoeLinkBox = ({ Photo, price, real_price, model, rate }: ShoeInterface) =
 	return (
 		<ChakraLink
 			as={Link}
-			to={`sneakers/${model}`}
+			to={`/sneakers/${model}`}
 			transitionDuration={"0.2s"}
 			display="flex"
 			flexDirection="column"
@@ -29,7 +30,7 @@ const ShoeLinkBox = ({ Photo, price, real_price, model, rate }: ShoeInterface) =
 				<Center p="1rem">
 					<Image
 						width={{ base: "auto", sm: "80%" }}
-						src={Photo[0].image_url}
+						src={Photo[0] !== undefined ? Photo[0].image_url : ShoeImgDefault}
 						height="auto"
 						color="transparent"
 						loading="lazy"

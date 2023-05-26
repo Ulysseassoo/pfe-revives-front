@@ -6,6 +6,7 @@ import StarDisable from "@assets/Common/Illustration/star-disable.svg";
 import TruckSvg from "@assets/Common/Illustration/truck.svg";
 import HomeSvg from "@assets/Common/Illustration/home.svg";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
+import { PhotoInterface } from "@inteface/PhotoInterface";
 
 type ShoeProps = {
 	title: string;
@@ -13,7 +14,7 @@ type ShoeProps = {
 	price: number;
 	description: string;
 	sizes: Sizes[];
-	photos: string[];
+	photos: PhotoInterface[];
 };
 
 type Sizes = {
@@ -32,11 +33,24 @@ const SneakerDetail = (shoe: ShoeProps) => {
 				marginBottom={5}
 			>
 				<Flex width={isSmallerThan960 ? "full" : "48%"} flexDirection="column">
-					<Image src={shoe.photos[0]} width="100%" objectFit="contain" background="#F6F6F6" marginBottom={15} />
+					<Image
+						src={shoe.photos[0].image_url}
+						width="100%"
+						objectFit="contain"
+						background="#F6F6F6"
+						marginBottom={15}
+					/>
 					<Flex justifyContent="space-between">
-						{shoe.photos.slice(1, 4).map((photo, index) => {
+						{shoe.photos.slice(1, 4).map((photo) => {
 							return (
-								<Image src={photo} key={index} width="30%" height="100px" objectFit="contain" background="#F6F6F6" />
+								<Image
+									src={photo.image_url}
+									key={photo.id}
+									width="30%"
+									height="100px"
+									objectFit="contain"
+									background="#F6F6F6"
+								/>
 							);
 						})}
 					</Flex>

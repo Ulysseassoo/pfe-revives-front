@@ -12,7 +12,7 @@ import ShoeLinkBox from "@components/Common/ShoeLinkBox";
 
 const MostSoldShoes = () => {
 	const { data } = useListShoesQuery({
-		model: "Jordan",
+		brand: "Jordan",
 		take: "5",
 		gt: 180,
 	});
@@ -52,7 +52,7 @@ const MostSoldShoes = () => {
 				<Box flex="1">
 					<ChakraLink
 						as={Link}
-						to="/shoe/jordan-1"
+						to={`/sneakers/${data.data[0].model}`}
 						transitionDuration={"0.2s"}
 						display="flex"
 						flexDirection="column"
@@ -116,7 +116,7 @@ const MostSoldShoes = () => {
 					}}
 				>
 					{data.data.slice(1, 5).map((shoe, index) => (
-						<ShoeLinkBox {...shoe} />
+						<ShoeLinkBox key={shoe.shoe_id} {...shoe} />
 					))}
 				</Grid>
 			</Flex>

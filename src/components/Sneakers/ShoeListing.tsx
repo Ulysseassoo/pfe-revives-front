@@ -41,7 +41,7 @@ const ShoeListing = ({ isFilter, shoes }: PropsType) => {
 			>
 				{shoes.map((shoe, index) => {
 					return (
-						<Box w="full" key={`${shoe.name}${index}`}>
+						<Box w="full" key={`${shoe.shoe_id}`}>
 							<ShoeLinkBox {...shoe} />
 						</Box>
 					);

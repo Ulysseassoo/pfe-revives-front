@@ -12,7 +12,7 @@ interface Props {
 
 const Catalog = ({ numberOfShoes = 8 }: Props) => {
 	const { data } = useListShoesQuery({
-		model: "Jordan",
+		brand: "Jordan",
 		take: numberOfShoes.toString(),
 		rate: "2",
 	});

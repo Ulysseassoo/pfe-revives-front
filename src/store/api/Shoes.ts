@@ -3,20 +3,20 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { host } from "@services/Api";
 
 interface ProductsQueryParams {
-	model: string;
+	model?: string;
 	gte?: number;
 	gt?: number;
 	lte?: number;
 	lt?: number;
 	size?: number;
-	brand?: string;
+	brand: string;
 	color?: string;
 	take?: string;
 	rate?: string;
 }
 
 const buildUrl = (params: ProductsQueryParams) => {
-	let url = `?&model=${params.model}`;
+	let url = `?&brand=${params.brand}`;
 	if (params.gt) {
 		url += `&gt=${params.gt}`;
 	}
@@ -25,6 +25,9 @@ const buildUrl = (params: ProductsQueryParams) => {
 	}
 	if (params.rate) {
 		url += `&rate=${params.rate}`;
+	}
+	if (params.model) {
+		url += `&model=${params.model}`;
 	}
 
 	return url;

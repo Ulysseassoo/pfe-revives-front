@@ -13,7 +13,7 @@ import { useListShoesQuery } from "@store/api/Shoes";
 
 const Sneakers = () => {
 	const { data } = useListShoesQuery({
-		model: "Jordan",
+		brand: "Jordan",
 		take: "20",
 	});
 

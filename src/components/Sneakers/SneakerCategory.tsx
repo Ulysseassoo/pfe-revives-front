@@ -14,7 +14,7 @@ type Props = {
 
 const SneakerCategory = ({ title, nbrOfShoe, rate }: Props) => {
 	const { data } = useListShoesQuery({
-		model: "Jordan",
+		brand: "Jordan",
 		take: nbrOfShoe.toString(),
 		rate,
 	});
