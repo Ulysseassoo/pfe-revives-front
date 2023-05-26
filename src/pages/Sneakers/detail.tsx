@@ -11,10 +11,11 @@ import Newsletter from "@components/Home/Newsletter";
 import { Box } from "@chakra-ui/react";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
 import { useListShoesQuery } from "@store/api/Shoes";
+import SneakerDetailSkeleton from "@components/Sneakers/SneakerDetailSkeleton";
 
 const detail = () => {
 	const { id } = useParams();
-	const { data } = useListShoesQuery({
+	const { data, isFetching } = useListShoesQuery({
 		brand: "Jordan",
 		take: "1",
 		model: id,
@@ -59,21 +60,21 @@ const detail = () => {
 		},
 	];
 
-	if (!data) return <></>;
-
-	const shoe = data.data[0];
-
 	return (
 		<Box as="section">
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
-				<SneakerDetail
-					title={shoe.model}
-					description={shoe.description}
-					price={shoe.price}
-					sizes={sizes}
-					rate={shoe.rate}
-					photos={shoe.Photo.slice(0, 4)}
-				/>
+				{data !== undefined && !isFetching ? (
+					<SneakerDetail
+						title={data.data[0].model}
+						description={data.data[0].description}
+						price={data.data[0].price}
+						sizes={sizes}
+						rate={data.data[0].rate}
+						photos={data.data[0].Photo.slice(0, 4)}
+					/>
+				) : (
+					<SneakerDetailSkeleton />
+				)}
 
 				<SneakerCategory title="Vous aimerez aussi" nbrOfShoe={3} rate="4" />
 				<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} rate="1" />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Skeleton, Text } from "@chakra-ui/react";
 
 import { ShoeInterface } from "@inteface/ShoeInterface";
 
@@ -11,10 +11,12 @@ import ShoeLinkBox from "@components/Common/ShoeLinkBox";
 
 type PropsType = {
 	isFilter: boolean;
-	shoes: ShoeInterface[];
+	shoes: ShoeInterface[] | undefined;
 };
 
 const ShoeListing = ({ isFilter, shoes }: PropsType) => {
+	const emptyArray = Array.from({ length: 9 });
+
 	return (
 		<>
 			{isFilter && (
@@ -39,13 +41,17 @@ const ShoeListing = ({ isFilter, shoes }: PropsType) => {
 				}}
 				mb="10"
 			>
-				{shoes.map((shoe, index) => {
-					return (
-						<Box w="full" key={`${shoe.shoe_id}`}>
-							<ShoeLinkBox {...shoe} />
-						</Box>
-					);
-				})}
+				{shoes !== undefined
+					? shoes.map((shoe, index) => {
+							return (
+								<Box w="full" key={`${shoe.shoe_id}`}>
+									<ShoeLinkBox {...shoe} />
+								</Box>
+							);
+					  })
+					: emptyArray.map((_, index) => (
+							<Skeleton background="#F8F8F8" w="full" key={`skeletong${index}`} height="300px" />
+					  ))}
 			</Grid>
 		</>
 	);

@@ -17,14 +17,12 @@ const Sneakers = () => {
 		take: "20",
 	});
 
-	if (!data) return <></>;
-
 	return (
 		<Box as="section">
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
 				<Box>
 					<TitleWithLogoBackground title="NOS SNEAKERS PRÉFÉRÉES" subtitle="PRODUIT" />
-					<ShoeListing isFilter={true} shoes={data.data} />
+					<ShoeListing isFilter={true} shoes={data?.data} />
 				</Box>
 			</Box>
 			<SecondLife

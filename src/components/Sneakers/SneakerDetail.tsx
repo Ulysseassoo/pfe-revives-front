@@ -47,7 +47,7 @@ const SneakerDetail = (shoe: ShoeProps) => {
 									src={photo.image_url}
 									key={photo.id}
 									width="30%"
-									height="100px"
+									height="150px"
 									objectFit="contain"
 									background="#F6F6F6"
 								/>
