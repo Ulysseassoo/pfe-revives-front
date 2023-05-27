@@ -7,14 +7,12 @@ import TruckSvg from "@assets/Common/Illustration/truck.svg";
 import HomeSvg from "@assets/Common/Illustration/home.svg";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
 import { PhotoInterface } from "@inteface/PhotoInterface";
+import { useAppDispatch } from "@store/hooks";
+import { addItem, addProduct } from "@store/reducers/Cart";
+import { ShoeInterface } from "@inteface/ShoeInterface";
 
-type ShoeProps = {
-	title: string;
-	rate: number;
-	price: number;
-	description: string;
-	sizes: Sizes[];
-	photos: PhotoInterface[];
+type Props = {
+	shoe: ShoeInterface;
 };
 
 type Sizes = {
@@ -22,7 +20,47 @@ type Sizes = {
 	isAvailable: boolean;
 };
 
-const SneakerDetail = (shoe: ShoeProps) => {
+const sizes: Sizes[] = [
+	{
+		size: 40,
+		isAvailable: true,
+	},
+	{
+		size: 40.5,
+		isAvailable: false,
+	},
+	{
+		size: 41,
+		isAvailable: true,
+	},
+	{
+		size: 42,
+		isAvailable: true,
+	},
+	{
+		size: 42.5,
+		isAvailable: false,
+	},
+	{
+		size: 43,
+		isAvailable: true,
+	},
+	{
+		size: 44,
+		isAvailable: false,
+	},
+	{
+		size: 44.5,
+		isAvailable: true,
+	},
+	{
+		size: 45,
+		isAvailable: true,
+	},
+];
+
+const SneakerDetail = ({ shoe }: Props) => {
+	const dispatch = useAppDispatch();
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	return (
 		<Flex flexDirection="column" marginY={10}>
@@ -34,14 +72,14 @@ const SneakerDetail = (shoe: ShoeProps) => {
 			>
 				<Flex width={isSmallerThan960 ? "full" : "48%"} flexDirection="column">
 					<Image
-						src={shoe.photos[0].image_url}
+						src={shoe.Photo[0].image_url}
 						width="100%"
 						objectFit="contain"
 						background="#F6F6F6"
 						marginBottom={15}
 					/>
 					<Flex justifyContent="space-between">
-						{shoe.photos.slice(1, 4).map((photo) => {
+						{shoe.Photo.slice(1, 4).map((photo) => {
 							return (
 								<Image
 									src={photo.image_url}
@@ -57,7 +95,7 @@ const SneakerDetail = (shoe: ShoeProps) => {
 				</Flex>
 				<Flex width={isSmallerThan960 ? "full" : "48%"} flexDirection="column" fontFamily="metropolis" gap={2}>
 					<Text fontWeight={900} fontSize={25}>
-						{shoe.title}
+						{shoe.model}
 					</Text>
 
 					<Flex>
@@ -78,7 +116,7 @@ const SneakerDetail = (shoe: ShoeProps) => {
 					<Flex flexDirection="column" gap={2} marginBottom={5}>
 						<Text fontWeight={900}>TAILLES</Text>
 						<Flex gap={5} wrap="wrap">
-							{shoe.sizes.map((size, index) => {
+							{sizes.map((size, index) => {
 								return (
 									<Button
 										key={size.size}
@@ -114,6 +152,10 @@ const SneakerDetail = (shoe: ShoeProps) => {
 							borderRadius={5}
 							_hover={{
 								background: "primaryHover",
+							}}
+							onClick={() => {
+								dispatch(addItem(shoe));
+								dispatch(addProduct(shoe));
 							}}
 						>
 							Ajouter au panier

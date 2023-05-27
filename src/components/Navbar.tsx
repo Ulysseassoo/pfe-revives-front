@@ -50,6 +50,7 @@ export const links = [
 
 const Navbar = () => {
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+	const { products } = useAppSelector((state) => state.cart);
 	const navigate = useNavigate();
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
@@ -165,7 +166,18 @@ const Navbar = () => {
 							h="30px"
 							w="30px"
 						>
-							<Icon as={BsBag} boxSize={4} />
+							<Circle
+								size="2"
+								zIndex="4"
+								background="primary"
+								position="absolute"
+								top="1.5"
+								right="1"
+								transition="0.2s ease all"
+								opacity={products.length > 0 ? 1 : 0}
+								visibility={products.length > 0 ? "visible" : "hidden"}
+							/>
+							<Icon position="relative" as={BsBag} boxSize={4} />
 						</Center>
 					</ChakraLink>
 					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/favorites">

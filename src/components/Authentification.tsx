@@ -1,6 +1,7 @@
 import { getUserInformations } from "@services/Api/User";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import useAuthStore, { setToken, setUser } from "@store/reducers/Auth";
+import { getUserCart } from "@store/reducers/Cart";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -18,6 +19,7 @@ const Authentification = ({ children }: Props) => {
 				const user = await getUserInformations();
 				dispatch(setUser(user));
 				dispatch(setToken(storageToken));
+				dispatch(getUserCart());
 			} catch (error) {
 				// TODO Check if we are in protected pages
 				localStorage.removeItem("token");

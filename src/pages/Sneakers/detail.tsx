@@ -21,60 +21,10 @@ const detail = () => {
 		model: id,
 	});
 
-	const sizes = [
-		{
-			size: 40,
-			isAvailable: true,
-		},
-		{
-			size: 40.5,
-			isAvailable: false,
-		},
-		{
-			size: 41,
-			isAvailable: true,
-		},
-		{
-			size: 42,
-			isAvailable: true,
-		},
-		{
-			size: 42.5,
-			isAvailable: false,
-		},
-		{
-			size: 43,
-			isAvailable: true,
-		},
-		{
-			size: 44,
-			isAvailable: false,
-		},
-		{
-			size: 44.5,
-			isAvailable: true,
-		},
-		{
-			size: 45,
-			isAvailable: true,
-		},
-	];
-
 	return (
 		<Box as="section">
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
-				{data !== undefined && !isFetching ? (
-					<SneakerDetail
-						title={data.data[0].model}
-						description={data.data[0].description}
-						price={data.data[0].price}
-						sizes={sizes}
-						rate={data.data[0].rate}
-						photos={data.data[0].Photo.slice(0, 4)}
-					/>
-				) : (
-					<SneakerDetailSkeleton />
-				)}
+				{data !== undefined && !isFetching ? <SneakerDetail shoe={data.data[0]} /> : <SneakerDetailSkeleton />}
 
 				<SneakerCategory title="Vous aimerez aussi" nbrOfShoe={3} rate="4" />
 				<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} rate="1" />
