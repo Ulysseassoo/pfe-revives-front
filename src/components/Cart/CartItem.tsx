@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { CartProduct } from "@inteface/CartInterface";
-import { useAppDispatch } from "@store/hooks";
-import { removeItem, removeProduct } from "@store/reducers/Cart";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { removeItem, removeProduct, setProducts } from "@store/reducers/Cart";
 import React from "react";
 import { BsTrash } from "react-icons/bs";
 
@@ -11,21 +11,50 @@ interface Props {
 
 const CartItem = ({ shoe }: Props) => {
 	const dispatch = useAppDispatch();
+	const { isAuthenticated } = useAppSelector((state) => state.auth);
 
+	const removeCartProduct = async () => {
+		if (isAuthenticated) {
+			dispatch(removeItem(shoe.shoe_id));
+			dispatch(removeProduct(shoe.shoe_id));
+		} else {
+			const localProducts = localStorage.getItem("products");
+			if (localProducts !== null) {
+				const prdts = JSON.parse(localProducts) as CartProduct[];
+				const updatedProducts = prdts.filter((product) => {
+					if (product.shoe_id === shoe.shoe_id) {
+						return null;
+					}
+
+					return product;
+				});
+
+				localStorage.setItem("products", JSON.stringify(updatedProducts));
+				dispatch(setProducts(updatedProducts));
+			}
+		}
+	};
 	return (
-		<Flex gap="1.25rem" w="full" borderBottom="1px solid transparent" borderBottomColor="gray.200" p="1.25rem">
+		<Flex
+			gap="1.25rem"
+			w="full"
+			borderBottom="1px solid transparent"
+			borderBottomColor="gray.200"
+			p={{ lg: "1.25rem", base: "1.25rem 0" }}
+			flexDir={{ lg: "row", base: "column" }}
+		>
 			<Box
-				w={{ lg: "200px", base: "100px" }}
+				w={{ lg: "200px", base: "full" }}
 				flexShrink={0}
 				style={{
 					aspectRatio: "1/1",
 				}}
 			>
-				<Image w="90%" background="#F8F8F8" src={shoe.Photo[0].image_url} alt={shoe.model} />
+				<Image w={{ lg: "90%", base: "full" }} background="#F8F8F8" src={shoe.Photo[0].image_url} alt={shoe.model} />
 			</Box>
 			<Flex flexDir="column" w="full">
 				<Flex justifyContent={"space-between"} alignItems="center">
-					<Text fontWeight={"600"} fontSize={{ lg: "2xl", base: "xl" }}>
+					<Text fontWeight={"600"} fontSize={{ lg: "2xl", md: "xl", base: "sm" }}>
 						{shoe.model}
 					</Text>
 					<Text mt="2" color="rgba(0,0,0,0.5)" fontWeight={"700"} fontSize={{ lg: "md", base: "sm" }}>
@@ -52,10 +81,7 @@ const CartItem = ({ shoe }: Props) => {
 						_hover={{
 							color: "black",
 						}}
-						onClick={() => {
-							dispatch(removeItem(shoe.shoe_id));
-							dispatch(removeProduct(shoe.shoe_id));
-						}}
+						onClick={removeCartProduct}
 					/>
 				</Flex>
 			</Flex>

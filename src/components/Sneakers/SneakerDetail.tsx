@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Flex, Image, Text, Button, useMediaQuery } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Flex, Image, Text, Button, useMediaQuery, Toast, useToast } from "@chakra-ui/react";
 
 import StarActivate from "@assets/Common/Illustration/star-activate.svg";
 import StarDisable from "@assets/Common/Illustration/star-disable.svg";
@@ -7,9 +7,10 @@ import TruckSvg from "@assets/Common/Illustration/truck.svg";
 import HomeSvg from "@assets/Common/Illustration/home.svg";
 import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
 import { PhotoInterface } from "@inteface/PhotoInterface";
-import { useAppDispatch } from "@store/hooks";
-import { addItem, addProduct } from "@store/reducers/Cart";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { addItem, addProduct, setProducts } from "@store/reducers/Cart";
 import { ShoeInterface } from "@inteface/ShoeInterface";
+import { CartProduct } from "@inteface/CartInterface";
 
 type Props = {
 	shoe: ShoeInterface;
@@ -61,7 +62,46 @@ const sizes: Sizes[] = [
 
 const SneakerDetail = ({ shoe }: Props) => {
 	const dispatch = useAppDispatch();
+	const { isAuthenticated } = useAppSelector((state) => state.auth);
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
+	const [isLoading, setIsLoading] = useState(false);
+	const toast = useToast();
+	const addProductCart = async () => {
+		setIsLoading(true);
+		try {
+			if (isAuthenticated) {
+				await dispatch(addProduct(shoe));
+			} else {
+				const localProducts = localStorage.getItem("products");
+				if (localProducts !== null) {
+					const prdts = JSON.parse(localProducts) as CartProduct[];
+					const existingItem = prdts.find((i) => i.shoe_id === shoe.shoe_id);
+
+					if (existingItem) {
+						existingItem.quantity += 1;
+					} else {
+						prdts.push({ ...shoe, quantity: 1 });
+					}
+
+					localStorage.setItem("products", JSON.stringify(prdts));
+					dispatch(setProducts(prdts));
+				}
+			}
+			toast({
+				title: "Success",
+				description: `${shoe.model} ajouté avec succès au panier`,
+				status: "success",
+			});
+			setIsLoading(false);
+		} catch (error) {
+			setIsLoading(false);
+			toast({
+				title: "Erreur",
+				description: "Le produit n'a pas pu être ajouté au panier, veuillez réessayer",
+				status: "error",
+			});
+		}
+	};
 	return (
 		<Flex flexDirection="column" marginY={10}>
 			<Flex
@@ -153,10 +193,8 @@ const SneakerDetail = ({ shoe }: Props) => {
 							_hover={{
 								background: "primaryHover",
 							}}
-							onClick={() => {
-								dispatch(addItem(shoe));
-								dispatch(addProduct(shoe));
-							}}
+							onClick={addProductCart}
+							isLoading={isLoading}
 						>
 							Ajouter au panier
 						</Button>

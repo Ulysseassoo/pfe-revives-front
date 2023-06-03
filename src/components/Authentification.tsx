@@ -1,7 +1,7 @@
 import { getUserInformations } from "@services/Api/User";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import useAuthStore, { setToken, setUser } from "@store/reducers/Auth";
-import { getUserCart } from "@store/reducers/Cart";
+import { getUserCart, setProducts } from "@store/reducers/Cart";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -25,6 +25,13 @@ const Authentification = ({ children }: Props) => {
 				localStorage.removeItem("token");
 				dispatch(setUser(null));
 				dispatch(setToken(null));
+			}
+		} else {
+			const localProducts = localStorage.getItem("products");
+			if (localProducts === null) {
+				localStorage.setItem("products", JSON.stringify([]));
+			} else {
+				dispatch(setProducts(JSON.parse(localProducts)));
 			}
 		}
 	};

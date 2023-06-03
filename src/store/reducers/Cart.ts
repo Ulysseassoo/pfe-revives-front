@@ -109,6 +109,10 @@ const cartSlice = createSlice({
 		clearCart: (state) => {
 			state.products = [];
 		},
+		setProducts: (state, action: PayloadAction<CartProduct[]>) => {
+			// @ts-ignore
+			state.products = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getUserCart.rejected, (state) => {
@@ -131,5 +135,5 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, setProducts } = cartSlice.actions;
 export default cartSlice.reducer;
