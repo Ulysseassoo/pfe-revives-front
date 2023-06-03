@@ -49,7 +49,7 @@ const Cart = () => {
 									))}
 								</Flex>
 							</Box>
-							<Flex gap="4" w={{ lg: "40%", base: "full" }} flexDir={{ lg: "row", base: "column-reverse" }}>
+							<Flex gap="4" w={{ lg: "40%", base: "full" }} flexDir={{ lg: "column", base: "column-reverse" }}>
 								<Box>
 									<Heading fontSize="xl" as="h3" mb="3">
 										Récapitulatif de la commande
@@ -89,44 +89,46 @@ const Cart = () => {
 									</Box>
 								</Box>
 
-								<Button
-									as={Link}
-									to={isAuthenticated ? "/checkout" : "/login"}
-									mt="8"
-									p="2"
-									py="6"
-									w="full"
-									background="primary"
-									color="white"
-									_hover={{
-										background: "primaryHover",
-									}}
-									borderRadius="none"
-								>
-									{isAuthenticated ? "Paiement" : "Se connecter"}
-								</Button>
-
-								{isAuthenticated ? (
-									<Box mt="4">
-										<Text fontSize="sm">Payer avec :</Text>
-										<HStack dir="" gap="4" mt="2">
-											<Box width="50px" height="50px">
-												<Image
-													src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/backpages/ic_mastercard.png"
-													alt="mastercard"
-													objectFit="contain"
-												/>
-											</Box>
-											<Box width="50px" height="50px">
-												<Image
-													src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/backpages/ic_visa.png"
-													alt="visa"
-													objectFit="contain"
-												/>
-											</Box>
-										</HStack>
-									</Box>
-								) : null}
+								<Flex flexDir="column">
+									<Button
+										as={Link}
+										to={isAuthenticated ? "/checkout" : "/login"}
+										mt="8"
+										p="2"
+										py="6"
+										w="full"
+										background="primary"
+										color="white"
+										_hover={{
+											background: "primaryHover",
+										}}
+										borderRadius="none"
+										state={{ from: "cart" }}
+									>
+										{isAuthenticated ? "Paiement" : "Se connecter"}
+									</Button>
+									{isAuthenticated ? (
+										<Box mt="4">
+											<Text fontSize="sm">Payer avec :</Text>
+											<HStack dir="" gap="4" mt="2">
+												<Box width="50px" height="50px">
+													<Image
+														src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/backpages/ic_mastercard.png"
+														alt="mastercard"
+														objectFit="contain"
+													/>
+												</Box>
+												<Box width="50px" height="50px">
+													<Image
+														src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/backpages/ic_visa.png"
+														alt="visa"
+														objectFit="contain"
+													/>
+												</Box>
+											</HStack>
+										</Box>
+									) : null}
+								</Flex>
 							</Flex>
 						</Flex>
 					</Flex>

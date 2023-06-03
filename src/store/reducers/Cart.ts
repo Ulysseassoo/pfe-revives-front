@@ -113,6 +113,11 @@ const cartSlice = createSlice({
 			// @ts-ignore
 			state.products = action.payload;
 		},
+		setCart: (state, action: PayloadAction<CartInterface>) => {
+			state.id = action.payload.id;
+			// @ts-ignore
+			state.products = action.payload.products;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getUserCart.rejected, (state) => {
@@ -135,5 +140,5 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { addItem, removeItem, clearCart, setProducts } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, setProducts, setCart } = cartSlice.actions;
 export default cartSlice.reducer;

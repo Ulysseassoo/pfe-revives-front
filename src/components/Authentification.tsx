@@ -1,7 +1,9 @@
+import { CartProduct } from "@inteface/CartInterface";
+import { updateCart } from "@services/Api/Cart";
 import { getUserInformations } from "@services/Api/User";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import useAuthStore, { setToken, setUser } from "@store/reducers/Auth";
-import { getUserCart, setProducts } from "@store/reducers/Cart";
+import { getUserCart, setCart, setProducts } from "@store/reducers/Cart";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -17,9 +19,19 @@ const Authentification = ({ children }: Props) => {
 		if (storageToken !== null) {
 			try {
 				const user = await getUserInformations();
+				const localProducts = localStorage.getItem("products");
 				dispatch(setUser(user));
 				dispatch(setToken(storageToken));
-				dispatch(getUserCart());
+				const cart = await dispatch(getUserCart());
+				if (localProducts !== null) {
+					const products = JSON.parse(localProducts);
+					const res = await updateCart({
+						products,
+						id: cart.payload.id,
+					});
+					dispatch(setCart(res));
+					localStorage.removeItem("products");
+				}
 			} catch (error) {
 				// TODO Check if we are in protected pages
 				localStorage.removeItem("token");

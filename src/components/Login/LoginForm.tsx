@@ -2,7 +2,7 @@ import { Button, Flex, Heading, useMediaQuery, useToast } from "@chakra-ui/react
 import { LoginFormData, loginSchema } from "@services/schemas/User";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormInput from "@components/Form/FormInput";
 import { HiOutlineMail } from "react-icons/hi";
@@ -15,6 +15,7 @@ const LoginForm = () => {
 	const [isMobile] = useMediaQuery("(max-width: 600px)");
 	const navigate = useNavigate();
 	const toast = useToast();
+	const { state } = useLocation();
 	const {
 		control,
 		handleSubmit,
@@ -41,7 +42,11 @@ const LoginForm = () => {
 				duration: 3000,
 				isClosable: true,
 			});
-			navigate("/");
+			if (state !== null) {
+				navigate(`/${state.from}`);
+			} else {
+				navigate("/");
+			}
 		} catch (error: any) {
 			toast({
 				title: "Une erreur est survenue.",
