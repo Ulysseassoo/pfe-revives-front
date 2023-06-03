@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
 	const { products } = useAppSelector((state) => state.cart);
 	const { isAuthenticated } = useAppSelector((state) => state.auth);
+	console.log("🚀 ~ file: index.tsx:12 ~ Cart ~ products:", products)
 
 	const calculateTotalItems = (products: CartProduct[]): number => {
 		return products.reduce((total, product) => total + product.quantity, 0);

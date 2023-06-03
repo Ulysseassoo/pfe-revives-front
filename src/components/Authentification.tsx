@@ -25,11 +25,13 @@ const Authentification = ({ children }: Props) => {
 				const cart = await dispatch(getUserCart());
 				if (localProducts !== null) {
 					const products = JSON.parse(localProducts);
-					const res = await updateCart({
-						products,
-						id: cart.payload.id,
-					});
-					dispatch(setCart(res));
+					if(products.length > 0) {
+						const res = await updateCart({
+							products,
+							id: cart.payload.id,
+						});
+						dispatch(setCart(res));
+					}
 					localStorage.removeItem("products");
 				}
 			} catch (error) {
