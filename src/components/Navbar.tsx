@@ -1,5 +1,4 @@
 import {
-	Avatar,
 	Box,
 	Center,
 	Flex,
@@ -12,18 +11,16 @@ import {
 	Link as ChakraLink,
 	Circle,
 } from "@chakra-ui/react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme";
 import Logo from "../assets/logo.svg";
 import ArrowDown from "../assets/arrow-down.svg";
 import SearchButton from "../assets/search.svg";
-import Account from "../assets/account.svg";
-import Cart from "../assets/handbag-line.svg";
-import Favorite from "../assets/heart-line.svg";
 import { AiOutlineMenu } from "react-icons/ai";
 import NavMenu from "./NavMenu";
 import { useAppSelector } from "@store/hooks";
 import { BsBag, BsHeart } from "react-icons/bs";
+import NavAccount from "./NavAccount";
 
 export const links = [
 	{
@@ -49,27 +46,13 @@ export const links = [
 ];
 
 const Navbar = () => {
-	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 	const { products } = useAppSelector((state) => state.cart);
-	const navigate = useNavigate();
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
 	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const handleClose = () => {
 		document.body.style.overflow = "initial";
 		onClose();
-	};
-
-	const NavAccount = () => {
-		if (isAuthenticated) {
-			return (
-				<Link to="/account">
-					<Avatar size="xs" bg="primary" name={`${user?.first_name} ${user?.last_name}`} cursor={"pointer"} />
-				</Link>
-			);
-		}
-
-		return <Image cursor={"pointer"} onClick={() => navigate("/register")} src={Account} w="20px" />;
 	};
 
 	const searchBar = () => {
@@ -105,8 +88,47 @@ const Navbar = () => {
 					<Image src={Logo} w={"125px"} />
 
 					<Flex gap="6">
-						{NavAccount()}
-						<Image src={Cart} w="20px" />
+						<NavAccount />
+						<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/cart">
+							<Center
+								position="relative"
+								_before={{
+									content: `""`,
+									position: "absolute",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									width: "full",
+									height: "full",
+									borderRadius: "full",
+									background: "transparent",
+									zIndex: -1,
+									transition: "0.3s ease all",
+								}}
+								transition="0.3s ease all"
+								_hover={{
+									_before: {
+										background: "blackAlpha.200",
+									},
+								}}
+								h="25px"
+								w="25px"
+							>
+								<Circle
+									size="2"
+									zIndex="4"
+									background="primary"
+									position="absolute"
+									top="1.5"
+									right="1"
+									transition="0.2s ease all"
+									opacity={products.length > 0 ? 1 : 0}
+									visibility={products.length > 0 ? "visible" : "hidden"}
+								/>
+								<Icon position="relative" as={BsBag} boxSize={4} />
+							</Center>
+						</ChakraLink>
 					</Flex>
 				</Flex>
 				<Box py="2" px={PADDING_IPAD} background="white" w={"full"} borderRadius="full" h="full">
@@ -139,7 +161,7 @@ const Navbar = () => {
 				<Image src={Logo} w={"200px"} />
 				{searchBar()}
 				<Flex gap="4" alignItems={"center"}>
-					{NavAccount()}
+					<NavAccount />
 					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/cart">
 						<Center
 							position="relative"
