@@ -28,6 +28,7 @@ const Authentification = ({ children }: Props) => {
 					if(products.length > 0) {
 						const res = await updateCart({
 							products,
+							// @ts-ignore
 							id: cart.payload.id,
 						});
 						dispatch(setCart(res));
