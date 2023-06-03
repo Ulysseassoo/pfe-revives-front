@@ -10,8 +10,11 @@ import Account from "../assets/account.svg";
 import { RiAccountPinCircleLine } from "react-icons/ri";
 
 
+interface Props {
+    isMenu?: boolean
+}
 
-const NavAccount = () => {
+const NavAccount = ({isMenu} : Props) => {
     const navigate = useNavigate();
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
@@ -38,7 +41,7 @@ const NavAccount = () => {
 				>
 
                     <Icon as={RiAccountPinCircleLine} cursor={"pointer"} boxSize={5} />
-    <Text fontSize="md">Se connecter</Text>
+  {isMenu &&  <Text fontSize="md">Se connecter</Text>}
 
                 </ChakraLink>
     }

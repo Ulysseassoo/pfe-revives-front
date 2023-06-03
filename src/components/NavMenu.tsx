@@ -46,7 +46,7 @@ const NavMenu = ({ isOpen, onClose }: Props) => {
 				borderColor="#E3E3E3"
 			>
 				
-				<NavAccount />
+				<NavAccount isMenu />
 				<Flex gap="3" alignItems="center">
 					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/cart">
 						<Center
