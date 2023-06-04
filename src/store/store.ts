@@ -1,11 +1,13 @@
 import { Action, AnyAction, combineReducers, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import authReducer from "./reducers/Auth";
 import cartReducer from "./reducers/Cart";
+import favoritesReducer from "./reducers/Favorites";
 import { shoesApi } from "./api/Shoes";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
 	cart: cartReducer,
+	favorites: favoritesReducer,
 	[shoesApi.reducerPath]: shoesApi.reducer,
 });
 

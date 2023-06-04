@@ -27,6 +27,7 @@ import "@fontsource/metropolis/800.css";
 import "@fontsource/metropolis/900.css";
 import "@fontsource-variable/open-sans/wdth.css";
 import Cart from "@pages/Cart";
+import Favorites from "@pages/Favorites";
 
 // To be able to use swiper components slider
 register();
@@ -76,6 +77,10 @@ function App() {
 				{
 					path: "/cart",
 					element: <Cart />,
+				},
+				{
+					path: "/favorites",
+					element: <Favorites />,
 				},
 			],
 		},
