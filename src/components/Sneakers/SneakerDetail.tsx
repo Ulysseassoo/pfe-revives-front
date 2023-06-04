@@ -11,6 +11,7 @@ import { ShoeInterface } from "@inteface/ShoeInterface"
 import { CartProduct } from "@inteface/CartInterface"
 import { createFavorite } from "@services/Api/Favorite"
 import { addFavorite } from "@store/reducers/Favorites"
+import useFavorite from "@hooks/useFavorite"
 
 type Props = {
 	shoe: ShoeInterface
@@ -65,8 +66,8 @@ const SneakerDetail = ({ shoe }: Props) => {
 	const { isAuthenticated } = useAppSelector((state) => state.auth)
 	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)")
 	const [isLoading, setIsLoading] = useState(false)
-	const [isLoadingFavorites, setIsLoadingFavorites] = useState(false)
 	const toast = useToast()
+	const useFav = useFavorite()
 	const addProductCart = async () => {
 		setIsLoading(true)
 		try {
@@ -103,35 +104,7 @@ const SneakerDetail = ({ shoe }: Props) => {
 			})
 		}
 	}
-	const addProductToFavorites = async () => {
-		setIsLoadingFavorites(true)
-		if (!isAuthenticated) {
-			setIsLoadingFavorites(false)
 
-			return toast({
-				title: "Erreur",
-				description: "Vous devez être authentifier pour ajouter un produit aux favoris.",
-				status: "error"
-			})
-		}
-		try {
-			const favorite = await createFavorite(shoe.shoe_id)
-			dispatch(addFavorite(favorite.data))
-			toast({
-				title: "Succès",
-				description: `Vous avez ajouter ${shoe.model} à vos favoris`,
-				status: "success"
-			})
-			setIsLoadingFavorites(false)
-		} catch (error: any) {
-			toast({
-				title: "Erreur",
-				description: error.response.data.errors[0] || "Une erreur est survenue, veuillez réessayer",
-				status: "error"
-			})
-			setIsLoadingFavorites(false)
-		}
-	}
 	return (
 		<Flex flexDirection="column" marginY={10}>
 			<Flex gap={isSmallerThan960 ? "16" : 0} flexDir={isSmallerThan960 ? "column" : "row"} justifyContent="space-between" marginBottom={5}>
@@ -216,8 +189,8 @@ const SneakerDetail = ({ shoe }: Props) => {
 							color="#D4AA7D"
 							background="white"
 							borderRadius={5}
-							onClick={addProductToFavorites}
-							isLoading={isLoadingFavorites}>
+							onClick={() => useFav.addProductToFavorites(shoe.shoe_id, shoe.model)}
+							isLoading={useFav.isLoadingFavorites}>
 							Ajouter aux favoris
 						</Button>
 					</Flex>

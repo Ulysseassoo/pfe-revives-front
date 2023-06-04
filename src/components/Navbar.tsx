@@ -1,59 +1,49 @@
-import {
-	Box,
-	Center,
-	Flex,
-	Icon,
-	Image,
-	Input,
-	Text,
-	useDisclosure,
-	useMediaQuery,
-	Link as ChakraLink,
-	Circle,
-} from "@chakra-ui/react";
-import { Link, NavLink } from "react-router-dom";
-import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme";
-import Logo from "../assets/logo.svg";
-import ArrowDown from "../assets/arrow-down.svg";
-import SearchButton from "../assets/search.svg";
-import { AiOutlineMenu } from "react-icons/ai";
-import NavMenu from "./NavMenu";
-import { useAppSelector } from "@store/hooks";
-import { BsBag, BsHeart } from "react-icons/bs";
-import NavAccount from "./NavAccount";
+import { Box, Center, Flex, Icon, Image, Input, Text, useDisclosure, useMediaQuery, Link as ChakraLink, Circle } from "@chakra-ui/react"
+import { Link, NavLink } from "react-router-dom"
+import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme"
+import Logo from "../assets/logo.svg"
+import ArrowDown from "../assets/arrow-down.svg"
+import SearchButton from "../assets/search.svg"
+import { AiOutlineMenu } from "react-icons/ai"
+import NavMenu from "./NavMenu"
+import { useAppSelector } from "@store/hooks"
+import { BsBag, BsHeart } from "react-icons/bs"
+import NavAccount from "./NavAccount"
 
 export const links = [
 	{
 		title: "Accueil",
-		to: "/",
+		to: "/"
 	},
 	{
 		title: "Nos sneakers",
-		to: "/sneakers",
+		to: "/sneakers"
 	},
 	{
 		title: "Revive's \n c'est quoi ?",
-		to: "/about",
+		to: "/about"
 	},
 	{
 		title: "Restauration de chaussure",
-		to: "/restauration",
+		to: "/restauration"
 	},
 	{
 		title: "Contactez-nous",
-		to: "/contact",
-	},
-];
+		to: "/contact"
+	}
+]
 
 const Navbar = () => {
-	const { products } = useAppSelector((state) => state.cart);
-	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
-	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)");
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { products } = useAppSelector((state) => state.cart)
+	const { isAuthenticated } = useAppSelector((state) => state.auth)
+	const favorites = useAppSelector((state) => state.favorites)
+	const [isSmallerThan960] = useMediaQuery("(max-width: 960px)")
+	const [isSmallerThan600] = useMediaQuery("(max-width: 600px)")
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	const handleClose = () => {
-		document.body.style.overflow = "initial";
-		onClose();
-	};
+		document.body.style.overflow = "initial"
+		onClose()
+	}
 
 	const searchBar = () => {
 		return (
@@ -68,8 +58,8 @@ const Navbar = () => {
 					<Image cursor={"pointer"} src={SearchButton} w="30px" />
 				</Flex>
 			</Box>
-		);
-	};
+		)
+	}
 
 	if (isSmallerThan960) {
 		return (
@@ -78,8 +68,8 @@ const Navbar = () => {
 					<Icon
 						as={AiOutlineMenu}
 						onClick={() => {
-							document.body.style.overflow = "hidden";
-							onOpen();
+							document.body.style.overflow = "hidden"
+							onOpen()
 						}}
 						boxSize={6}
 						color="black"
@@ -104,17 +94,16 @@ const Navbar = () => {
 									borderRadius: "full",
 									background: "transparent",
 									zIndex: -1,
-									transition: "0.3s ease all",
+									transition: "0.3s ease all"
 								}}
 								transition="0.3s ease all"
 								_hover={{
 									_before: {
-										background: "blackAlpha.200",
-									},
+										background: "blackAlpha.200"
+									}
 								}}
 								h="25px"
-								w="25px"
-							>
+								w="25px">
 								<Circle
 									size="2"
 									zIndex="4"
@@ -140,19 +129,13 @@ const Navbar = () => {
 							<Image src={ArrowDown} />
 						</Flex>
 						<Box as="span" h="24px" w="1px" background={"#838383"} />
-						<Input
-							fontSize={isSmallerThan600 ? "xs" : "initial"}
-							w="56"
-							flex="1"
-							variant="unstyled"
-							placeholder="Rechercher un produit..."
-						/>
+						<Input fontSize={isSmallerThan600 ? "xs" : "initial"} w="56" flex="1" variant="unstyled" placeholder="Rechercher un produit..." />
 						<Image cursor={"pointer"} src={SearchButton} w="30px" />
 					</Flex>
 				</Box>
 				<NavMenu onClose={handleClose} isOpen={isOpen} />
 			</Box>
-		);
+		)
 	}
 
 	return (
@@ -177,17 +160,16 @@ const Navbar = () => {
 								borderRadius: "full",
 								background: "transparent",
 								zIndex: -1,
-								transition: "0.3s ease all",
+								transition: "0.3s ease all"
 							}}
 							transition="0.3s ease all"
 							_hover={{
 								_before: {
-									background: "blackAlpha.200",
-								},
+									background: "blackAlpha.200"
+								}
 							}}
 							h="30px"
-							w="30px"
-						>
+							w="30px">
 							<Circle
 								size="2"
 								zIndex="4"
@@ -202,35 +184,47 @@ const Navbar = () => {
 							<Icon position="relative" as={BsBag} boxSize={4} />
 						</Center>
 					</ChakraLink>
-					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/favorites">
-						<Center
-							position="relative"
-							_before={{
-								content: `""`,
-								position: "absolute",
-								top: 0,
-								left: 0,
-								right: 0,
-								bottom: 0,
-								width: "full",
-								height: "full",
-								borderRadius: "full",
-								background: "transparent",
-								zIndex: -1,
-								transition: "0.3s ease all",
-							}}
-							transition="0.3s ease all"
-							_hover={{
-								_before: {
-									background: "blackAlpha.200",
-								},
-							}}
-							h="30px"
-							w="30px"
-						>
-							<Icon as={BsHeart} boxSize={4} />
-						</Center>
-					</ChakraLink>
+					{isAuthenticated ? (
+						<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/favorites">
+							<Center
+								position="relative"
+								_before={{
+									content: `""`,
+									position: "absolute",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									width: "full",
+									height: "full",
+									borderRadius: "full",
+									background: "transparent",
+									zIndex: -1,
+									transition: "0.3s ease all"
+								}}
+								transition="0.3s ease all"
+								_hover={{
+									_before: {
+										background: "blackAlpha.200"
+									}
+								}}
+								h="30px"
+								w="30px">
+								<Circle
+									size="2"
+									zIndex="4"
+									background="primary"
+									position="absolute"
+									top="1.5"
+									right="1"
+									transition="0.2s ease all"
+									opacity={favorites.length > 0 ? 1 : 0}
+									visibility={favorites.length > 0 ? "visible" : "hidden"}
+								/>
+								<Icon as={BsHeart} boxSize={4} />
+							</Center>
+						</ChakraLink>
+					) : null}
 				</Flex>
 			</Flex>
 			<Center gap="50" p="5" borderTop="1px solid #E3E3E3">
@@ -241,7 +235,7 @@ const Navbar = () => {
 				))}
 			</Center>
 		</Box>
-	);
-};
+	)
+}
 
-export default Navbar;
+export default Navbar
