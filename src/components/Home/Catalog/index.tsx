@@ -15,7 +15,7 @@ const Catalog = ({ numberOfShoes = 8 }: Props) => {
 	const { data } = useListShoesQuery({
 		brand: "Jordan",
 		take: numberOfShoes.toString(),
-		rate: "2"
+		rate: "5"
 	})
 	const [isSmallerThan980] = useMediaQuery("(max-width: 980px)")
 

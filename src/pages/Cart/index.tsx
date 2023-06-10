@@ -1,24 +1,23 @@
-import { Box, Button, Center, Flex, HStack, Heading, Image, List, ListItem, Text, VStack } from "@chakra-ui/react";
-import CartItem from "@components/Cart/CartItem";
-import Footer from "@components/Footer";
-import { CartProduct } from "@inteface/CartInterface";
-import { useAppSelector } from "@store/hooks";
-import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Box, Button, Center, Flex, HStack, Heading, Image, List, ListItem, Text, VStack } from "@chakra-ui/react"
+import CartItem from "@components/Cart/CartItem"
+import Footer from "@components/Footer"
+import { CartProduct } from "@inteface/CartInterface"
+import { useAppSelector } from "@store/hooks"
+import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme"
+import React from "react"
+import { Link } from "react-router-dom"
 
 const Cart = () => {
-	const { products } = useAppSelector((state) => state.cart);
-	const { isAuthenticated } = useAppSelector((state) => state.auth);
-	console.log("🚀 ~ file: index.tsx:12 ~ Cart ~ products:", products)
+	const { products } = useAppSelector((state) => state.cart)
+	const { isAuthenticated } = useAppSelector((state) => state.auth)
 
 	const calculateTotalItems = (products: CartProduct[]): number => {
-		return products.reduce((total, product) => total + product.quantity, 0);
-	};
+		return products.reduce((total, product) => total + product.quantity, 0)
+	}
 
 	const calculateTotalPrice = (products: CartProduct[]): number => {
-		return products.reduce((total, product) => total + product.price * product.quantity, 0);
-	};
+		return products.reduce((total, product) => total + product.price * product.quantity, 0)
+	}
 
 	return (
 		<>
@@ -27,8 +26,7 @@ const Cart = () => {
 					<VStack spacing="4">
 						<Heading>Votre panier est vide</Heading>
 						<Text textAlign={"center"}>
-							Il semblerait que vous n'ayez rien ajouter à votre panier. <br /> Allez explorer notre catalogue de
-							chaussures.
+							Il semblerait que vous n'ayez rien ajouter à votre panier. <br /> Allez explorer notre catalogue de chaussures.
 						</Text>
 					</VStack>
 				) : (
@@ -46,7 +44,7 @@ const Cart = () => {
 								</Heading>
 								<Flex gap="4" flexDir="column">
 									{products.map((product) => (
-										<CartItem key={product.shoe_id} shoe={product} />
+										<CartItem key={`${product.shoe_id}-${product.size}`} shoe={product} />
 									))}
 								</Flex>
 							</Box>
@@ -101,11 +99,10 @@ const Cart = () => {
 										background="primary"
 										color="white"
 										_hover={{
-											background: "primaryHover",
+											background: "primaryHover"
 										}}
 										borderRadius="none"
-										state={{ from: "cart" }}
-									>
+										state={{ from: "cart" }}>
 										{isAuthenticated ? "Paiement" : "Se connecter"}
 									</Button>
 									{isAuthenticated ? (
@@ -137,7 +134,7 @@ const Cart = () => {
 			</Center>
 			<Footer />
 		</>
-	);
-};
+	)
+}
 
-export default Cart;
+export default Cart

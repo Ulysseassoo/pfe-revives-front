@@ -1,39 +1,39 @@
-import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
-import { CartProduct } from "@inteface/CartInterface";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { removeItem, removeProduct, setProducts } from "@store/reducers/Cart";
-import React from "react";
-import { BsTrash } from "react-icons/bs";
+import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react"
+import { CartProduct } from "@inteface/CartInterface"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
+import { removeItem, removeProduct, setProducts } from "@store/reducers/Cart"
+import React from "react"
+import { BsTrash } from "react-icons/bs"
 
 interface Props {
-	shoe: CartProduct;
+	shoe: CartProduct
 }
 
 const CartItem = ({ shoe }: Props) => {
-	const dispatch = useAppDispatch();
-	const { isAuthenticated } = useAppSelector((state) => state.auth);
+	const dispatch = useAppDispatch()
+	const { isAuthenticated } = useAppSelector((state) => state.auth)
 
 	const removeCartProduct = async () => {
 		if (isAuthenticated) {
-			dispatch(removeItem(shoe.shoe_id));
-			dispatch(removeProduct(shoe.shoe_id));
+			dispatch(removeItem({ shoe_id: shoe.shoe_id, size: shoe.size }))
+			dispatch(removeProduct(shoe.shoe_id))
 		} else {
-			const localProducts = localStorage.getItem("products");
+			const localProducts = localStorage.getItem("products")
 			if (localProducts !== null) {
-				const prdts = JSON.parse(localProducts) as CartProduct[];
+				const prdts = JSON.parse(localProducts) as CartProduct[]
 				const updatedProducts = prdts.filter((product) => {
-					if (product.shoe_id === shoe.shoe_id) {
-						return null;
+					if (product.shoe_id === shoe.shoe_id && product.size === shoe.size) {
+						return null
 					}
 
-					return product;
-				});
+					return product
+				})
 
-				localStorage.setItem("products", JSON.stringify(updatedProducts));
-				dispatch(setProducts(updatedProducts));
+				localStorage.setItem("products", JSON.stringify(updatedProducts))
+				dispatch(setProducts(updatedProducts))
 			}
 		}
-	};
+	}
 	return (
 		<Flex
 			gap="1.25rem"
@@ -41,15 +41,13 @@ const CartItem = ({ shoe }: Props) => {
 			borderBottom="1px solid transparent"
 			borderBottomColor="gray.200"
 			p={{ lg: "1.25rem", base: "1.25rem 0" }}
-			flexDir={{ lg: "row", base: "column" }}
-		>
+			flexDir={{ lg: "row", base: "column" }}>
 			<Box
 				w={{ lg: "200px", base: "full" }}
 				flexShrink={0}
 				style={{
-					aspectRatio: "1/1",
-				}}
-			>
+					aspectRatio: "1/1"
+				}}>
 				<Image w={{ lg: "90%", base: "full" }} background="#F8F8F8" src={shoe.Photo[0].image_url} alt={shoe.model} />
 			</Box>
 			<Flex flexDir="column" w="full">
@@ -79,14 +77,14 @@ const CartItem = ({ shoe }: Props) => {
 						boxSize={5}
 						cursor={"pointer"}
 						_hover={{
-							color: "black",
+							color: "black"
 						}}
 						onClick={removeCartProduct}
 					/>
 				</Flex>
 			</Flex>
 		</Flex>
-	);
-};
+	)
+}
 
-export default CartItem;
+export default CartItem

@@ -1,15 +1,16 @@
-import { ShoeInterface } from "./ShoeInterface";
-import User from "./UserInteface";
+import { ShoeInterface } from "./ShoeInterface"
+import User from "./UserInteface"
 
 export interface CartInterface {
-	id: number;
-	user: User;
-	userId: number;
-	products: CartProduct;
-	createdAt: Date;
-	updatedAt: Date;
+	id: number
+	user: User
+	userId: number
+	products: CartProduct
+	createdAt: Date
+	updatedAt: Date
 }
 
-export interface CartProduct extends ShoeInterface {
-	quantity: number;
+export interface CartProduct extends Omit<ShoeInterface, "size"> {
+	quantity: number
+	size: number
 }
