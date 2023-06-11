@@ -29,6 +29,8 @@ import "@fontsource-variable/open-sans/wdth.css"
 import Cart from "@pages/Cart"
 import Favorites from "@pages/Favorites"
 import NotFound from "@pages/NotFound"
+import Success from "@pages/Success"
+import Failed from "@pages/Failed"
 
 // To be able to use swiper components slider
 register()
@@ -82,6 +84,14 @@ function App() {
 				{
 					path: "/favorites",
 					element: <Favorites />
+				},
+				{
+					path: "/success",
+					element: <Success />
+				},
+				{
+					path: "/failed",
+					element: <Failed />
 				},
 				{
 					path: "*",
