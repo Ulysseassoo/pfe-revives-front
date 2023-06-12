@@ -9,6 +9,7 @@ import NavMenu from "./NavMenu"
 import { useAppSelector } from "@store/hooks"
 import { BsBag, BsHeart } from "react-icons/bs"
 import NavAccount from "./NavAccount"
+import Searchbar from "./Searchbar"
 
 export const links = [
 	{
@@ -43,22 +44,6 @@ const Navbar = () => {
 	const handleClose = () => {
 		document.body.style.overflow = "initial"
 		onClose()
-	}
-
-	const searchBar = () => {
-		return (
-			<Box background="#F8F8F8" w={isSmallerThan960 ? "full" : "initial"} borderRadius="full" h="full">
-				<Flex w="full" px="5" py="1" alignItems="center" gap="10px">
-					<Flex gap="2px">
-						<Text fontWeight={"semibold"}>Toutes les catégories</Text>
-						<Image src={ArrowDown} />
-					</Flex>
-					<Box as="span" h="24px" w="1px" background={"#838383"} />
-					<Input w="56" variant="unstyled" placeholder="Rechercher un produit..." />
-					<Image cursor={"pointer"} src={SearchButton} w="30px" />
-				</Flex>
-			</Box>
-		)
 	}
 
 	if (isSmallerThan960) {
@@ -142,7 +127,7 @@ const Navbar = () => {
 		<Box as="nav">
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
 				<Image src={Logo} w={"200px"} />
-				{searchBar()}
+				<Searchbar />
 				<Flex gap="4" alignItems={"center"}>
 					<NavAccount />
 					<ChakraLink as={Link} justifyContent="center" alignItems="center" display="flex" to="/cart">
