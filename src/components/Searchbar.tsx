@@ -6,6 +6,7 @@ import useDebounce from "@hooks/useDebounce"
 import { ShoeInterface } from "@inteface/ShoeInterface"
 import { searchShoes } from "@services/Api/Shoe"
 import { Link, useNavigate, useNavigation } from "react-router-dom"
+import { PADDING_IPAD } from "@theme/theme"
 
 const Searchbar = () => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -49,9 +50,16 @@ const Searchbar = () => {
 	}
 
 	return (
-		<Box background="#F8F8F8" w={isSmallerThan960 ? "full" : "initial"} borderRadius="full" h="full" position="relative">
-			<Flex w="full" px="5" py="1" alignItems="center" gap="10px" position="relative" zIndex="11">
-				<Flex gap="2px">
+		<Box
+			background={{ lg: "#F8F8F8", base: "white" }}
+			w={{ lg: "initial", base: "full" }}
+			borderRadius="full"
+			h="full"
+			position="relative"
+			px={{ lg: 0, base: PADDING_IPAD }}
+			py={{ lg: 0, base: 2 }}>
+			<Flex w="full" px={{ lg: "5", base: 0 }} py="1" alignItems="center" gap="10px" position="relative" zIndex="11">
+				<Flex gap="2px" alignItems="center">
 					<Text fontSize={isSmallerThan600 ? "xs" : "initial"} fontWeight={"semibold"}>
 						Toutes les catégories
 					</Text>
@@ -62,6 +70,7 @@ const Searchbar = () => {
 					onChange={(e) => handleInputText(e.target.value)}
 					value={searchText}
 					w="56"
+					flex={{ lg: "initial", base: 1 }}
 					fontSize={isSmallerThan600 ? "xs" : "initial"}
 					variant="unstyled"
 					placeholder="Rechercher un produit..."
@@ -75,7 +84,15 @@ const Searchbar = () => {
 				)}
 			</Flex>
 			{shoes.length > 0 && (
-				<List background="#F8F8F8" p="4" borderBottomRadius={"xl"} width="full" zIndex="10" position="absolute" top="25px" left="0">
+				<List
+					background={{ lg: "#F8F8F8", base: "white" }}
+					p="4"
+					borderBottomRadius={"xl"}
+					width="full"
+					zIndex="10"
+					position="absolute"
+					top="25px"
+					left="0">
 					{shoes.map((shoe) => (
 						<ListItem
 							_hover={{

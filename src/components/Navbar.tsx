@@ -105,19 +105,7 @@ const Navbar = () => {
 						</ChakraLink>
 					</Flex>
 				</Flex>
-				<Box py="2" px={PADDING_IPAD} background="white" w={"full"} borderRadius="full" h="full">
-					<Flex w="full" py="1" alignItems="center" gap="10px">
-						<Flex gap="2px" alignItems="center">
-							<Text fontSize={isSmallerThan600 ? "xs" : "initial"} fontWeight={"semibold"}>
-								Toutes les catégories
-							</Text>
-							<Image src={ArrowDown} />
-						</Flex>
-						<Box as="span" h="24px" w="1px" background={"#838383"} />
-						<Input fontSize={isSmallerThan600 ? "xs" : "initial"} w="56" flex="1" variant="unstyled" placeholder="Rechercher un produit..." />
-						<Image cursor={"pointer"} src={SearchButton} w="30px" />
-					</Flex>
-				</Box>
+				<Searchbar />
 				<NavMenu onClose={handleClose} isOpen={isOpen} />
 			</Box>
 		)
