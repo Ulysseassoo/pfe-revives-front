@@ -31,6 +31,7 @@ import Favorites from "@pages/Favorites"
 import NotFound from "@pages/NotFound"
 import Success from "@pages/Success"
 import Failed from "@pages/Failed"
+import Account from "@pages/Account"
 
 // To be able to use swiper components slider
 register()
@@ -88,6 +89,10 @@ function App() {
 				{
 					path: "/success",
 					element: <Success />
+				},
+				{
+					path: "/account",
+					element: <Account />
 				},
 				{
 					path: "/failed",
