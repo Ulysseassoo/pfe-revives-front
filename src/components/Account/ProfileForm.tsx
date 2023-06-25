@@ -1,12 +1,27 @@
-import { Flex, useMediaQuery } from "@chakra-ui/react"
+import { Button, Center, Flex, useMediaQuery } from "@chakra-ui/react"
 import FormInput from "@components/Form/FormInput"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { ProfileFormData, profileSchema } from "@services/schemas/Account"
-import React from "react"
+import { useAppSelector } from "@store/hooks"
+import React, { forwardRef, useImperativeHandle, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
-const ProfileForm = () => {
+export interface ProfileFormRef {
+	onModify: () => void
+}
+
+const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
+	const { user } = useAppSelector((state) => state.auth)
 	const [isMobile] = useMediaQuery("(max-width: 600px)")
+	const [isReadOnly, setIsReadOnly] = useState(true)
+
+	const onModify = () => {
+		setIsReadOnly(false)
+	}
+
+	useImperativeHandle(ref, () => ({
+		onModify
+	}))
 
 	const {
 		control,
@@ -16,7 +31,7 @@ const ProfileForm = () => {
 		defaultValues: {
 			password: "",
 			confirmPassword: "",
-			email: "",
+			email: user?.email,
 			address: "",
 			postalCode: "",
 			city: "",
@@ -28,44 +43,152 @@ const ProfileForm = () => {
 
 	const onSubmit = async (data: ProfileFormData) => {
 		console.log(data)
+		setIsReadOnly(true)
 	}
 
 	return (
-		<Flex gap="4" flexDir="column" as="form" w={isMobile ? "90%" : "80%"} onSubmit={handleSubmit(onSubmit)}>
-			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="4">
+		<Flex gap="8" flexDir="column" as="form" onSubmit={handleSubmit(onSubmit)}>
+			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
 				<Controller
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<FormInput
-							label="Prénom"
-							placeholder="Saississez votre prénom"
+							label="Votre email"
+							placeholder="Saississez votre email"
 							isRequired
-							errorMessage={errors.firstname?.message}
+							errorMessage={errors.email?.message}
 							value={value}
 							onChange={onChange}
 							onBlur={onBlur}
+							isDisabled={isReadOnly}
 						/>
 					)}
-					name="firstname"
+					name="email"
 				/>
 				<Controller
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<FormInput
-							label="Nom"
-							placeholder="Saississez votre nom"
+							label="Votre addresse"
+							placeholder="Saississez votre addresse"
 							isRequired
-							errorMessage={errors.lastname?.message}
+							errorMessage={errors.address?.message}
 							value={value}
 							onChange={onChange}
 							onBlur={onBlur}
+							isDisabled={isReadOnly}
 						/>
 					)}
-					name="lastname"
+					name="address"
 				/>
 			</Flex>
+
+			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Votre code postal"
+							placeholder="Saississez votre code postale"
+							isRequired
+							errorMessage={errors.postalCode?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="postalCode"
+				/>
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Votre ville"
+							placeholder="Saississez votre ville"
+							isRequired
+							errorMessage={errors.city?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="city"
+				/>
+			</Flex>
+
+			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Votre mot de passe"
+							placeholder="Saississez votre mot de passe"
+							isRequired
+							errorMessage={errors.password?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="password"
+				/>
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Confirmation de votre mot de passe"
+							placeholder="Saississez votre de passe encore une fois"
+							isRequired
+							errorMessage={errors.confirmPassword?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="confirmPassword"
+				/>
+			</Flex>
+
+			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Votre numéro de téléphone"
+							placeholder="Saississez votre numéro de téléphone"
+							isRequired
+							errorMessage={errors.phone?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="phone"
+				/>
+			</Flex>
+
+			<Center>
+				<Button
+					mt="4"
+					p="2"
+					w="180px"
+					background="primary"
+					color="white"
+					_hover={{
+						background: "primaryHover"
+					}}
+					type="submit"
+					isLoading={isLoading}>
+					Enregistrer
+				</Button>
+			</Center>
 		</Flex>
 	)
-}
+})
 
 export default ProfileForm
