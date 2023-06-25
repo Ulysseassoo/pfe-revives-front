@@ -3,20 +3,13 @@ import { useAppSelector } from "@store/hooks"
 import StarActivate from "@assets/Common/Illustration/star-activate.svg"
 import React from "react"
 import AccountCards from "@components/Account/AccountCards"
+import AccountContainer from "@components/Account/AccountContainer"
 
 const Account = () => {
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth)
 
 	return (
-		<Flex
-			flexDir="column"
-			p="6"
-			as="section"
-			border="1px solid #AEAEAE"
-			m="4"
-			gap="10"
-			borderRadius={"lg"}
-			boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}>
+		<AccountContainer>
 			<Flex gap="6">
 				<Center background="gray.200" height={{ lg: "200px", base: "100px" }} width={{ lg: "200px", base: "100px" }} borderRadius="lg">
 					<Avatar size={{ lg: "2xl", base: "lg" }} bg="primary" name={`${user?.first_name} ${user?.last_name}`} />
@@ -51,7 +44,7 @@ const Account = () => {
 				</Flex>
 			</Flex>
 			<AccountCards />
-		</Flex>
+		</AccountContainer>
 	)
 }
 

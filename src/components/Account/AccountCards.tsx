@@ -51,7 +51,7 @@ const AccountCards = () => {
 					left: "65%",
 					top: "-70%"
 				}}
-				to="profil"
+				to="profile"
 				title="Profil"
 				subtitle="Modifier mon profil public"
 				IconItem={VscAccount}
