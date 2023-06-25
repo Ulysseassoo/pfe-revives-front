@@ -12,6 +12,7 @@ import SneakerDetail from "@pages/Sneakers/detail"
 import Contact from "./pages/Contact"
 import Register from "@pages/Register"
 import Login from "@pages/Login"
+import Faq from "@pages/Faq"
 import Authentification from "@components/Authentification"
 import { register } from "swiper/element/bundle"
 
@@ -107,6 +108,10 @@ function App() {
 				{
 					path: "/failed",
 					element: <Failed />
+				},
+				{
+					path: '/faq',
+					element: <Faq />
 				},
 				{
 					path: "*",
