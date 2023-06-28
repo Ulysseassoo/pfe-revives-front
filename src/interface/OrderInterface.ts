@@ -8,4 +8,9 @@ export default interface Order {
 	price: number
 	shipping_options_shipping_option_id: number
 	user: User
+	Orders_has_shoes: Shoe[]
+}
+
+export interface Shoe {
+	quantity: string
 }
