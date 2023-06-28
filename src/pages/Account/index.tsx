@@ -1,15 +1,29 @@
 import { Avatar, Box, Center, Flex, HStack, Image, Text } from "@chakra-ui/react"
-import { useAppSelector } from "@store/hooks"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
 import StarActivate from "@assets/Common/Illustration/star-activate.svg"
 import React from "react"
 import AccountCards from "@components/Account/AccountCards"
 import AccountContainer from "@components/Account/AccountContainer"
+import { RiLogoutBoxFill } from "react-icons/ri"
+import { setToken, setUser } from "@store/reducers/Auth"
+import { useNavigate, useNavigation } from "react-router-dom"
+import { clearCart, setCart } from "@store/reducers/Cart"
 
 const Account = () => {
-	const { isAuthenticated, user } = useAppSelector((state) => state.auth)
+	const { user } = useAppSelector((state) => state.auth)
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
+
+	const Logout = () => {
+		localStorage.removeItem("token")
+		dispatch(setUser(null))
+		dispatch(setToken(null))
+		dispatch(clearCart())
+		navigate("/")
+	}
 
 	return (
-		<AccountContainer>
+		<AccountContainer onClick={Logout} text="Logout" CustomIcon={RiLogoutBoxFill}>
 			<Flex gap="6" mb="8">
 				<Center background="gray.200" height={{ lg: "200px", base: "100px" }} width={{ lg: "200px", base: "100px" }} borderRadius="lg">
 					<Avatar size={{ lg: "2xl", base: "lg" }} bg="primary" name={`${user?.first_name} ${user?.last_name}`} />

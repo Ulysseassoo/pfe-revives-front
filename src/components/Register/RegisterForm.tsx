@@ -12,39 +12,39 @@ import {
 	Button,
 	Heading,
 	useToast,
-	useMediaQuery,
-} from "@chakra-ui/react";
-import FormInput from "@components/Form/FormInput";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { HiOutlineMail } from "react-icons/hi";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { RegisterFormData, registerSchema } from "@services/schemas/User";
-import { login, register } from "@services/Api/User";
-import { useNavigate } from "react-router-dom";
-import useAuthStore, { setToken } from "@store/reducers/Auth";
-import { useAppDispatch } from "@store/hooks";
+	useMediaQuery
+} from "@chakra-ui/react"
+import FormInput from "@components/Form/FormInput"
+import React from "react"
+import { Controller, useForm } from "react-hook-form"
+import { HiOutlineMail } from "react-icons/hi"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { RegisterFormData, registerSchema } from "@services/schemas/User"
+import { login, register } from "@services/Api/User"
+import { useNavigate } from "react-router-dom"
+import useAuthStore, { setToken } from "@store/reducers/Auth"
+import { useAppDispatch } from "@store/hooks"
 
 const RegisterForm = () => {
-	const dispatch = useAppDispatch();
-	const [isMobile] = useMediaQuery("(max-width: 600px)");
-	const navigate = useNavigate();
-	const toast = useToast();
+	const dispatch = useAppDispatch()
+	const [isMobile] = useMediaQuery("(max-width: 600px)")
+	const navigate = useNavigate()
+	const toast = useToast()
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isLoading },
+		formState: { errors, isSubmitting }
 	} = useForm<RegisterFormData>({
 		defaultValues: {
 			lastname: "",
 			firstname: "",
 			password: "",
 			confirmPassword: "",
-			email: "",
+			email: ""
 		},
 		mode: "onChange",
-		resolver: yupResolver(registerSchema),
-	});
+		resolver: yupResolver(registerSchema)
+	})
 
 	const onSubmit = async (data: RegisterFormData) => {
 		try {
@@ -52,23 +52,23 @@ const RegisterForm = () => {
 				email: data.email,
 				password: data.password,
 				firstname: data.firstname,
-				lastname: data.lastname,
-			});
+				lastname: data.lastname
+			})
 			const { token } = await login({
 				email: data.email,
-				password: data.password,
-			});
-			localStorage.setItem("token", token);
-			dispatch(setToken(token));
+				password: data.password
+			})
+			localStorage.setItem("token", token)
+			dispatch(setToken(token))
 			toast({
 				title: "Votre compte a été crée.",
 				description: "Vous allez être redirigé vers la page d'accueil",
 				status: "success",
 				position: "top-right",
 				duration: 3000,
-				isClosable: true,
-			});
-			navigate("/");
+				isClosable: true
+			})
+			navigate("/")
 		} catch (error: any) {
 			toast({
 				title: "Une erreur est survenue.",
@@ -76,10 +76,10 @@ const RegisterForm = () => {
 				status: "error",
 				position: "top-right",
 				duration: 3000,
-				isClosable: true,
-			});
+				isClosable: true
+			})
 		}
-	};
+	}
 
 	return (
 		<Flex gap="4" flexDir="column" as="form" w={isMobile ? "90%" : "80%"} onSubmit={handleSubmit(onSubmit)}>
@@ -176,15 +176,14 @@ const RegisterForm = () => {
 				background="primary"
 				color="white"
 				_hover={{
-					background: "primaryHover",
+					background: "primaryHover"
 				}}
 				type="submit"
-				isLoading={isLoading}
-			>
+				isLoading={isSubmitting}>
 				S'enregistrer
 			</Button>
 		</Flex>
-	);
-};
+	)
+}
 
-export default RegisterForm;
+export default RegisterForm

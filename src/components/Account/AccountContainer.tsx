@@ -1,14 +1,16 @@
 import { Box, Flex, HStack, Icon, Text } from "@chakra-ui/react"
 import React from "react"
 import { GrEdit } from "react-icons/gr"
+import { IconType } from "react-icons/lib"
 
 interface Props {
 	children?: React.ReactNode
 	onClick?: () => void
 	text?: string
+	CustomIcon?: IconType
 }
 
-const AccountContainer = ({ children, onClick, text }: Props) => {
+const AccountContainer = ({ children, onClick, text, CustomIcon }: Props) => {
 	return (
 		<Flex
 			flexDir="column"
@@ -33,7 +35,7 @@ const AccountContainer = ({ children, onClick, text }: Props) => {
 						}}
 						onClick={onClick}
 						transition="all 0.3s ease-in-out">
-						<Icon as={GrEdit} />
+						<Icon as={CustomIcon !== undefined ? CustomIcon : GrEdit} />
 						<Text fontWeight={"semibold"}>{text}</Text>
 					</HStack>
 				) : null}
