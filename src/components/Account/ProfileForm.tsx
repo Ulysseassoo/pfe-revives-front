@@ -1,8 +1,10 @@
-import { Button, Center, Flex, useMediaQuery } from "@chakra-ui/react"
+import { Button, Center, Flex, useMediaQuery, useToast } from "@chakra-ui/react"
 import FormInput from "@components/Form/FormInput"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { updateUserInformations } from "@services/Api/User"
 import { ProfileFormData, profileSchema } from "@services/schemas/Account"
-import { useAppSelector } from "@store/hooks"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
+import { setUser } from "@store/reducers/Auth"
 import React, { forwardRef, useImperativeHandle, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
@@ -13,6 +15,8 @@ export interface ProfileFormRef {
 const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 	const { user } = useAppSelector((state) => state.auth)
 	const [isMobile] = useMediaQuery("(max-width: 600px)")
+	const toast = useToast()
+	const dispatch = useAppDispatch()
 	const [isReadOnly, setIsReadOnly] = useState(true)
 
 	const onModify = () => {
@@ -26,24 +30,58 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isLoading }
+		formState: { errors, isSubmitting }
 	} = useForm<ProfileFormData>({
-		defaultValues: {
+		values: {
 			password: "",
 			confirmPassword: "",
-			email: user?.email,
-			address: "",
-			postalCode: "",
-			city: "",
-			phone: ""
+			email: user?.email ?? "",
+			address: user?.shipping_address.address_line_1 ?? "",
+			postalCode: user?.shipping_address.zip_code ?? "",
+			city: user?.shipping_address.city ?? "",
+			phone: user?.phone ?? "",
+			country: user?.shipping_address.country ?? ""
 		},
 		mode: "onChange",
 		resolver: yupResolver(profileSchema)
 	})
 
 	const onSubmit = async (data: ProfileFormData) => {
-		console.log(data)
-		setIsReadOnly(true)
+		try {
+			if (user) {
+				const newUser = await updateUserInformations({
+					email: data.email,
+					firstname: user.first_name,
+					lastname: user.last_name,
+					password: data.password,
+					phone: data.phone,
+					postalCode: data.postalCode,
+					city: data.city,
+					country: data.country,
+					address: data.address
+				})
+				dispatch(setUser(newUser))
+				toast({
+					title: "Succès",
+					description: "Vos informations ont bien été mises à jour",
+					status: "success",
+					position: "top-right",
+					duration: 3000,
+					isClosable: true
+				})
+			}
+			setIsReadOnly(true)
+			toast
+		} catch (error: any) {
+			toast({
+				title: "Une erreur est survenue.",
+				description: "Veuillez réessayer plus tard",
+				status: "error",
+				position: "top-right",
+				duration: 3000,
+				isClosable: true
+			})
+		}
 	}
 
 	return (
@@ -88,6 +126,42 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<FormInput
+							label="Votre pays"
+							placeholder="Saississez votre pays"
+							isRequired
+							errorMessage={errors.phone?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="country"
+				/>
+
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
+							label="Votre numéro de téléphone"
+							placeholder="Saississez votre numéro de téléphone"
+							isRequired
+							errorMessage={errors.phone?.message}
+							value={value}
+							onChange={onChange}
+							onBlur={onBlur}
+							isDisabled={isReadOnly}
+						/>
+					)}
+					name="phone"
+				/>
+			</Flex>
+
+			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<FormInput
 							label="Votre code postal"
 							placeholder="Saississez votre code postale"
 							isRequired
@@ -123,9 +197,9 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<FormInput
-							label="Votre mot de passe"
-							placeholder="Saississez votre mot de passe"
-							isRequired
+							label="Votre nouveau mot de passe"
+							placeholder="Saississez votre mot de passe si vous souhaitez le changer"
+							isRequired={false}
 							errorMessage={errors.password?.message}
 							value={value}
 							onChange={onChange}
@@ -141,7 +215,7 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 						<FormInput
 							label="Confirmation de votre mot de passe"
 							placeholder="Saississez votre de passe encore une fois"
-							isRequired
+							isRequired={false}
 							errorMessage={errors.confirmPassword?.message}
 							value={value}
 							onChange={onChange}
@@ -150,25 +224,6 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 						/>
 					)}
 					name="confirmPassword"
-				/>
-			</Flex>
-
-			<Flex flexDir={isMobile ? "column" : "row"} alignItems="center" gap="8">
-				<Controller
-					control={control}
-					render={({ field: { onChange, onBlur, value } }) => (
-						<FormInput
-							label="Votre numéro de téléphone"
-							placeholder="Saississez votre numéro de téléphone"
-							isRequired
-							errorMessage={errors.phone?.message}
-							value={value}
-							onChange={onChange}
-							onBlur={onBlur}
-							isDisabled={isReadOnly}
-						/>
-					)}
-					name="phone"
 				/>
 			</Flex>
 
@@ -183,7 +238,7 @@ const ProfileForm = forwardRef<ProfileFormRef, {}>((props, ref) => {
 						background: "primaryHover"
 					}}
 					type="submit"
-					isLoading={isLoading}>
+					isLoading={isSubmitting}>
 					Enregistrer
 				</Button>
 			</Center>

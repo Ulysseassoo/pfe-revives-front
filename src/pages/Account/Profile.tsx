@@ -17,7 +17,7 @@ const Profile = () => {
 	return (
 		<AccountContainer onClick={onModify} text={"Modifier"}>
 			<Flex gap="20" flexDir="column">
-				<Flex gap="20">
+				<Flex gap={{ lg: "20", base: "4" }}>
 					<Center background="gray.200" height={{ lg: "200px", base: "100px" }} width={{ lg: "200px", base: "100px" }} borderRadius="lg">
 						<Avatar size={{ lg: "2xl", base: "lg" }} bg="primary" name={`${user?.first_name} ${user?.last_name}`} />
 					</Center>

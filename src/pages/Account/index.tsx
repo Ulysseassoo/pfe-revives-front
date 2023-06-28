@@ -10,7 +10,7 @@ const Account = () => {
 
 	return (
 		<AccountContainer>
-			<Flex gap="6">
+			<Flex gap="6" mb="8">
 				<Center background="gray.200" height={{ lg: "200px", base: "100px" }} width={{ lg: "200px", base: "100px" }} borderRadius="lg">
 					<Avatar size={{ lg: "2xl", base: "lg" }} bg="primary" name={`${user?.first_name} ${user?.last_name}`} />
 				</Center>
