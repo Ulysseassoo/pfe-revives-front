@@ -1,28 +1,28 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-import TitleWithLogoBackground from "@components/Common/TitleWithLogoBackground";
-import ShoeListing from "@components/Sneakers/ShoeListing";
-import SecondLife from "@components/Sneakers/SecondLife";
-import SneakerCategory from "@components/Sneakers/SneakerCategory";
+import TitleWithLogoBackground from "@components/Common/TitleWithLogoBackground"
+import ShoeListing from "@components/Sneakers/ShoeListing"
+import SecondLife from "@components/Sneakers/SecondLife"
+import SneakerCategory from "@components/Sneakers/SneakerCategory"
 
-import SecondLifeImage from "@assets/Sneakers/second-life.png";
-import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme";
-import Newsletter from "@components/Home/Newsletter";
-import Footer from "@components/Footer";
-import { useListShoesQuery } from "@store/api/Shoes";
+import SecondLifeImage from "@assets/Sneakers/second-life.png"
+import { PADDING_DESKTOP, PADDING_IPAD } from "@theme/theme"
+import Newsletter from "@components/Home/Newsletter"
+import Footer from "@components/Footer"
+import { useListShoesQuery } from "@store/api/Shoes"
 
 const Sneakers = () => {
 	const { data } = useListShoesQuery({
 		brand: "Jordan",
-		take: "20",
-	});
+		take: "20"
+	})
 
 	return (
 		<Box as="section">
 			<Box paddingX={{ lg: PADDING_DESKTOP, base: PADDING_IPAD }}>
 				<Box>
 					<TitleWithLogoBackground title="NOS SNEAKERS PRÉFÉRÉES" subtitle="PRODUIT" />
-					<ShoeListing isFilter={true} shoes={data?.data} />
+					<ShoeListing isFilter={false} shoes={data?.data} />
 				</Box>
 			</Box>
 			<SecondLife
@@ -37,7 +37,7 @@ const Sneakers = () => {
 			<Newsletter />
 			<Footer />
 		</Box>
-	);
-};
+	)
+}
 
-export default Sneakers;
+export default Sneakers
