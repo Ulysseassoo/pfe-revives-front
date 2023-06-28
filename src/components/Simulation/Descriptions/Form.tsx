@@ -17,7 +17,6 @@ const Form = ({ register, errors }: Props) => {
             width={'100%'}
             flexDirection={'column'}
             gap={10}
-            border={'solid 1px #DADADA'}
             border={{
                 base: 'hidden',
                 lg: 'solid 1px #DADADA',
