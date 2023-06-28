@@ -56,12 +56,28 @@ const CartItem = ({ shoe }: Props) => {
 						{shoe.model}
 					</Text>
 					<Text mt="2" color="rgba(0,0,0,0.5)" fontWeight={"700"} fontSize={{ lg: "md", base: "sm" }}>
-						€ {shoe.price * shoe.quantity}
+						€ {(shoe.price - 20) * shoe.quantity}
 					</Text>
 				</Flex>
 				<Text fontWeight="500" color="rgba(0,0,0,0.5)" display="block">
 					{shoe.brand}
 				</Text>
+				<Flex justifyContent={"space-between"} alignItems="center" mt="2">
+					<Text fontWeight={"600"} fontSize={"md"}>
+						Frais de nettoyage
+					</Text>
+					<Text mt="2" color="rgba(0,0,0,0.5)" fontWeight={"700"} fontSize="sm">
+						€ {10 * shoe.quantity}
+					</Text>
+				</Flex>
+				<Flex justifyContent={"space-between"} alignItems="center" mt="2">
+					<Text fontWeight={"600"} fontSize={"md"}>
+						Frais de recoloration
+					</Text>
+					<Text mt="2" color="rgba(0,0,0,0.5)" fontWeight={"700"} fontSize="sm">
+						€ {10 * shoe.quantity}
+					</Text>
+				</Flex>
 				<Flex alignItems="center" justifyContent="space-between" mt="20">
 					<Flex alignItems="center" gap={{ lg: "8", base: "10" }} fontSize={{ lg: "md", md: "sm" }}>
 						<Flex alignItems="center" gap="1">
