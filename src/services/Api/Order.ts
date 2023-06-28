@@ -20,3 +20,14 @@ export const checkoutPayment = async (data: { products: CartProduct[] }) => {
 	}>(url, { products: data.products, shipping_options_shipping_option_id: 1 }, config)
 	return res.data.data
 }
+
+export const getOrders = async () => {
+	const token = localStorage.getItem("token")
+	const config = {
+		headers: { Authorization: `Bearer ${token}` }
+	}
+	const url = `${host}/orders`
+	const res = await axios.get(url, config)
+
+	return res.data.data
+}
