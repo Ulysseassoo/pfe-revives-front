@@ -32,8 +32,8 @@ export default function Footer() {
 					</Stack>
 					<Stack align={"flex-start"}>
 						<ListHeader>Entreprise</ListHeader>
-						<ChakraLink as={Link} to={'/faq'}>
-							A propos de nous
+						<ChakraLink as={Link} to={"/faq"}>
+							FAQ
 						</ChakraLink>
 					</Stack>
 					<Stack align={"flex-start"}>
