@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Icon, Image, Input, Text, useDisclosure, useMediaQuery, Link as ChakraLink, Circle } from "@chakra-ui/react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { PADDING_DESKTOP, PADDING_IPAD } from "../theme/theme"
 import Logo from "../assets/logo.svg"
 import ArrowDown from "../assets/arrow-down.svg"
@@ -29,6 +29,10 @@ export const links = [
 		to: "/restauration"
 	},
 	{
+		title: "Simulation",
+		to: "/simulator"
+	},
+	{
 		title: "Contactez-nous",
 		to: "/contact"
 	}
@@ -46,6 +50,8 @@ const Navbar = () => {
 		onClose()
 	}
 
+	const navigate = useNavigate();
+
 	if (isSmallerThan960) {
 		return (
 			<Box as="nav">
@@ -60,7 +66,17 @@ const Navbar = () => {
 						color="black"
 						cursor={"pointer"}
 					/>
-					<Image src={Logo} w={"125px"} />
+					<Flex
+						onClick={() => {
+							navigate('/')
+						}}
+					>
+
+						<Image 
+							src={Logo} 
+							w={"125px"} 
+							/>
+					</Flex>
 
 					<Flex gap="6">
 						<NavAccount />
@@ -114,7 +130,13 @@ const Navbar = () => {
 	return (
 		<Box as="nav">
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
-				<Image src={Logo} w={"200px"} />
+				<Flex
+					onClick={() => {
+						navigate('/')
+					}}
+				>
+					<Image src={Logo} w={"200px"} />
+				</Flex>
 				<Searchbar />
 				<Flex gap="4" alignItems={"center"}>
 					<NavAccount />

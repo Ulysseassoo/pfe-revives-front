@@ -11,6 +11,9 @@ import Restauration from "./pages/Restauration"
 import SneakerDetail from "@pages/Sneakers/detail"
 import Contact from "./pages/Contact"
 import Register from "@pages/Register"
+import Simulator from "@pages/Simulator"
+import Orders from "@pages/Account/orders"
+import OrderDetail from "@pages/Account/orders/detail"
 import Login from "@pages/Login"
 import Authentification from "@components/Authentification"
 import { register } from "swiper/element/bundle"
@@ -59,6 +62,10 @@ function App() {
 			children: [
 				{ path: "/", element: <Home /> },
 				{
+					path: "/simulator",
+					element: <Simulator />
+				},
+				{
 					path: "/about",
 					element: <About />
 				},
@@ -77,6 +84,14 @@ function App() {
 				{
 					path: "/contact",
 					element: <Contact />
+				},
+				{
+					path: "/account/orders",
+					element: <Orders />
+				},
+				{
+					path: "/account/orders/detail",
+					element: <OrderDetail />
 				},
 				{
 					path: "/cart",
