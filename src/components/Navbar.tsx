@@ -50,7 +50,7 @@ const Navbar = () => {
 		onClose()
 	}
 
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	if (isSmallerThan960) {
 		return (
@@ -68,14 +68,9 @@ const Navbar = () => {
 					/>
 					<Flex
 						onClick={() => {
-							navigate('/')
-						}}
-					>
-
-						<Image 
-							src={Logo} 
-							w={"125px"} 
-							/>
+							navigate("/")
+						}}>
+						<Image src={Logo} w={"125px"} />
 					</Flex>
 
 					<Flex gap="6">
@@ -132,10 +127,9 @@ const Navbar = () => {
 			<Flex w="full" py="4" px={PADDING_DESKTOP} justifyContent={"space-between"} alignItems="center" gap="50px">
 				<Flex
 					onClick={() => {
-						navigate('/')
-					}}
-				>
-					<Image src={Logo} w={"200px"} />
+						navigate("/")
+					}}>
+					<Image src={Logo} />
 				</Flex>
 				<Searchbar />
 				<Flex gap="4" alignItems={"center"}>

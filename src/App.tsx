@@ -37,6 +37,7 @@ import Success from "@pages/Success"
 import Failed from "@pages/Failed"
 import Account from "@pages/Account"
 import Profile from "@pages/Account/Profile"
+import Confidentiality from "@pages/Confidentiality/Confidentiality"
 
 // To be able to use swiper components slider
 register()
@@ -108,6 +109,10 @@ function App() {
 					element: <Success />
 				},
 				{
+					path: "/confidentiality",
+					element: <Confidentiality />
+				},
+				{
 					path: "/account",
 					children: [
 						{
@@ -125,7 +130,7 @@ function App() {
 					element: <Failed />
 				},
 				{
-					path: '/faq',
+					path: "/faq",
 					element: <Faq />
 				},
 				{

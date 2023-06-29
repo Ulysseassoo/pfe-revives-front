@@ -41,7 +41,7 @@ export default function Footer() {
 						<ChakraLink as={Link} href={"#"}>
 							Politique des cookies
 						</ChakraLink>
-						<ChakraLink as={Link} href={"#"}>
+						<ChakraLink as={Link} to={"/confidentiality"}>
 							Politique de confidentialité
 						</ChakraLink>
 						<ChakraLink as={Link} href={"#"}>
