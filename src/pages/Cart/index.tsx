@@ -168,6 +168,30 @@ const Cart = () => {
 														objectFit="contain"
 													/>
 												</Box>
+
+												<Box width="50px" height="50px">
+													<Image
+														src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/backpages/ic_paypal.png"
+														alt="paypal"
+														objectFit="contain"
+													/>
+												</Box>
+
+												<Box width="50px" height="50px">
+													<Image
+														src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2023/2023_04_18_fl_onl_card_logos/05_final_output_files/2023_04_18_FL_ONL_Card_logos_design_maestro_37X25.jpg"
+														alt="maestro"
+														objectFit="contain"
+													/>
+												</Box>
+
+												<Box width="50px" height="50px">
+													<Image
+														src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2023/2023_04_18_fl_onl_card_logos/05_final_output_files/2023_04_18_FL_ONL_Card_logos_design_carte_bleue_37X25.jpg"
+														alt="carte bleue"
+														objectFit="contain"
+													/>
+												</Box>
 											</HStack>
 										</Box>
 									) : null}
