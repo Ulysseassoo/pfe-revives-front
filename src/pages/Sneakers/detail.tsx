@@ -27,7 +27,7 @@ const detail = () => {
 				{data !== undefined && !isFetching ? <SneakerDetail shoe={data.data[0]} /> : <SneakerDetailSkeleton />}
 
 				<SneakerCategory title="Vous aimerez aussi" nbrOfShoe={3} rate="5" price={80} />
-				<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} rate="5" price={85} />
+				<SneakerCategory title="Voir plus de chaussures" nbrOfShoe={3} rate="5" price={96} />
 			</Box>
 
 			<SecondLife
