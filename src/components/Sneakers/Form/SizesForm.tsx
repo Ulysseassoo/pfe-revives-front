@@ -73,7 +73,7 @@ const SizesForm = ({ sizes, shoe }: Props) => {
 				}
 			}
 			toast({
-				title: "Success",
+				title: "Succès",
 				description: `${shoe.model} ajouté avec succès au panier`,
 				status: "success"
 			})

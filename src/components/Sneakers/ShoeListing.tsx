@@ -1,21 +1,22 @@
-import React from "react";
-import { Box, Flex, Grid, Image, Skeleton, Text } from "@chakra-ui/react";
+import React from "react"
+import { Box, Flex, Grid, Image, Skeleton, Text } from "@chakra-ui/react"
 
-import { ShoeInterface } from "@inteface/ShoeInterface";
+import { ShoeInterface } from "@inteface/ShoeInterface"
 
-import FilterLogo from "@assets/Common/Illustration/filter-logo.svg";
-import ArrowDown from "@assets/arrow-down.svg";
+import FilterLogo from "@assets/Common/Illustration/filter-logo.svg"
+import ArrowDown from "@assets/arrow-down.svg"
 
-import ShoeBox from "@components/Common/ShoeBox";
-import ShoeLinkBox from "@components/Common/ShoeLinkBox";
+import ShoeBox from "@components/Common/ShoeBox"
+import ShoeLinkBox from "@components/Common/ShoeLinkBox"
 
 type PropsType = {
-	isFilter: boolean;
-	shoes: ShoeInterface[] | undefined;
-};
+	isFilter: boolean
+	shoes: ShoeInterface[] | undefined
+	isLoading?: boolean
+}
 
-const ShoeListing = ({ isFilter, shoes }: PropsType) => {
-	const emptyArray = Array.from({ length: 9 });
+const ShoeListing = ({ isFilter, shoes, isLoading }: PropsType) => {
+	const emptyArray = Array.from({ length: 9 })
 
 	return (
 		<>
@@ -37,24 +38,23 @@ const ShoeListing = ({ isFilter, shoes }: PropsType) => {
 				gridTemplateColumns={{
 					lg: "repeat(3,minmax(0,1fr))",
 					md: "repeat(2,minmax(0,1fr))",
-					sm: "repeat(1,minmax(0,1fr))",
+					sm: "repeat(1,minmax(0,1fr))"
 				}}
-				mb="10"
-			>
-				{shoes !== undefined
-					? shoes.map((shoe, index) => {
-							return (
-								<Box w="full" key={`${shoe.shoe_id}`}>
-									<ShoeLinkBox {...shoe} />
-								</Box>
-							);
-					  })
-					: emptyArray.map((_, index) => (
-							<Skeleton background="#F8F8F8" w="full" key={`skeletong${index}`} height="300px" />
-					  ))}
+				mb="10">
+				{!isLoading
+					? shoes !== undefined
+						? shoes.map((shoe, index) => {
+								return (
+									<Box w="full" key={`${shoe.shoe_id}`}>
+										<ShoeLinkBox {...shoe} />
+									</Box>
+								)
+						  })
+						: emptyArray.map((_, index) => <Skeleton background="#F8F8F8" w="full" key={`skeletong${index}`} height="300px" />)
+					: emptyArray.map((_, index) => <Skeleton background="#F8F8F8" w="full" key={`skeletong${index}`} height="300px" />)}
 			</Grid>
 		</>
-	);
-};
+	)
+}
 
-export default ShoeListing;
+export default ShoeListing

@@ -1,25 +1,27 @@
-import React from "react";
-import { Box, Flex, Image, Text, Input } from "@chakra-ui/react";
+import React from "react"
+import { Box, Flex, Image, Text, Input } from "@chakra-ui/react"
 
-import ShoeListing from "./ShoeListing";
+import ShoeListing from "./ShoeListing"
 
-import { dummyShoes } from "@dummyDatas/Shoes";
-import { useListShoesQuery } from "@store/api/Shoes";
+import { dummyShoes } from "@dummyDatas/Shoes"
+import { useListShoesQuery } from "@store/api/Shoes"
 
 type Props = {
-	title: string;
-	nbrOfShoe: number;
-	rate: string;
-};
+	title: string
+	nbrOfShoe: number
+	rate: string
+	price?: number
+}
 
-const SneakerCategory = ({ title, nbrOfShoe, rate }: Props) => {
+const SneakerCategory = ({ title, nbrOfShoe, rate, price }: Props) => {
 	const { data } = useListShoesQuery({
 		brand: "Jordan",
 		take: nbrOfShoe.toString(),
-		rate,
-	});
+		gt: price ?? 40,
+		rate
+	})
 
-	if (!data) return <></>;
+	if (!data) return <></>
 
 	return (
 		<Flex flexDirection="column">
@@ -31,7 +33,7 @@ const SneakerCategory = ({ title, nbrOfShoe, rate }: Props) => {
 
 			<ShoeListing isFilter={false} shoes={data.data} />
 		</Flex>
-	);
-};
+	)
+}
 
-export default SneakerCategory;
+export default SneakerCategory
